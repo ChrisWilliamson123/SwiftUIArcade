@@ -21,6 +21,7 @@
 		833F3806279DCB3C0065B692 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3805279DCB3C0065B692 /* GameController.swift */; };
 		833F3808279DFB440065B692 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3807279DFB440065B692 /* GameBoard.swift */; };
 		83EE042527A094F400532F6D /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE042427A094F400532F6D /* GameOverView.swift */; };
+		83EE042827A09FBA00532F6D /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EE042727A09FBA00532F6D /* GameController.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		833F3805279DCB3C0065B692 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		833F3807279DFB440065B692 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		83EE042427A094F400532F6D /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		83EE042727A09FBA00532F6D /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		83EE042927A09FBA00532F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83EE042827A09FBA00532F6D /* GameController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,7 @@
 				833F37DF279DA8900065B692 /* SnakeSwiftUITests */,
 				833F37E9279DA8900065B692 /* SnakeSwiftUIUITests */,
 				833F37CD279DA88D0065B692 /* Products */,
+				83EE042627A09FBA00532F6D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +113,7 @@
 		833F37CE279DA88D0065B692 /* SnakeSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				83EE042927A09FBA00532F6D /* Info.plist */,
 				833F37FE279DAD3A0065B692 /* Models */,
 				833F37F9279DAA430065B692 /* Views */,
 				833F37CF279DA88D0065B692 /* SnakeSwiftUIApp.swift */,
@@ -162,6 +168,14 @@
 				833F3807279DFB440065B692 /* GameBoard.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		83EE042627A09FBA00532F6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83EE042727A09FBA00532F6D /* GameController.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +480,7 @@
 				DEVELOPMENT_TEAM = T3S4B78JWS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SnakeSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -495,6 +510,7 @@
 				DEVELOPMENT_TEAM = T3S4B78JWS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SnakeSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
