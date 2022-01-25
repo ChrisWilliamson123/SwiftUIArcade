@@ -1,0 +1,25 @@
+//
+//  ContentView.swift
+//  SnakeSwiftUI
+//
+//  Created by Chris on 25/01/2022.
+//
+
+import SwiftUI
+
+struct GameOverView: View {
+    let newGameAction: () -> Void
+    let finalScore: Int
+
+    var body: some View {
+        Text("GAME OVER!").font(.largeTitle).foregroundColor(.red)
+        Text("Score: \(finalScore)").font(.title)
+        Button("New Game", action: { newGameAction() })
+    }
+}
+
+struct GameOverView_Previews: PreviewProvider {
+    static var previews: some View {
+        GameOverView(newGameAction: { print("New Game tapped") }, finalScore: 10)
+    }
+}
