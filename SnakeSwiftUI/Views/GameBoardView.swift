@@ -10,6 +10,7 @@ import SwiftUI
 struct GameBoardView: View {
     let board: GameBoard
     let gridSize: Int
+    let twoPixelPadding = EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
     
     var body: some View {
         VStack(spacing: 0) {
@@ -20,13 +21,17 @@ struct GameBoardView: View {
                     }
                 }
             }
-        }.background(.black)
+        }
+        .background(.black)
+        .border(.white)
     }
     
     private func getCellFill(cellCoord: Coordinate) -> some View {
-        if board.snake.head == cellCoord { return AnyView(Image(systemName: "play.fill").foregroundColor(.white).rotationEffect(.degrees(board.snake.direction.snakeHeadRotation))) }
-        if board.snake.cells.contains(cellCoord) { return AnyView(Image(systemName: "stop.fill").foregroundColor(.white)) }
-        if cellCoord == board.foodLocation { return AnyView(Image(systemName: "ant.fill").foregroundColor(.red)) }
+        if board.snake.head == cellCoord { return AnyView(Image(systemName: "play.fill").resizable().padding(twoPixelPadding).foregroundColor(.white).rotationEffect(.degrees(board.snake.direction.snakeHeadRotation))) }
+        if board.snake.cells.contains(cellCoord) { return AnyView(Image(systemName: "stop.fill").resizable().padding(twoPixelPadding).foregroundColor(.white)) }
+        if cellCoord == board.foodLocation { return AnyView(Image(systemName: "ant.fill").resizable().foregroundColor(.red)) }
+//        if board.snake.cells.contains(cellCoord) { return AnyView(Rectangle().fill(.white)) }
+//        if cellCoord == board.foodLocation { return Rectangle().fill(.red) }
         return AnyView(Rectangle().fill(.clear))
     }
 }

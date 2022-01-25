@@ -10,6 +10,10 @@ import SwiftUI
 struct ContentView: View {
     private let gridSize: Int = 20
     @StateObject var gameController = GameController()
+    
+    init() {
+        
+    }
 
     var body: some View {
         if gameController.gameOver {
@@ -17,7 +21,7 @@ struct ContentView: View {
         } else {
             GeometryReader { geo in
                 VStack(spacing: 16) {
-                    Text("Score: \(gameController.score)").font(.largeTitle)
+                    Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.white)
                     GameBoardView(board: gameController.board, gridSize: gridSize)
                         .frame(height: geo.size.width)
                         
@@ -26,6 +30,7 @@ struct ContentView: View {
                 }
             }
             .padding()
+            .background(.black)
         }
     }
 }
