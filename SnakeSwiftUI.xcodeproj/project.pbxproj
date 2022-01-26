@@ -30,6 +30,8 @@
 		83EE1AED27A1E0B900A1434A /* GameActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */; };
 		83EE1AEF27A1E4A700A1434A /* GameTickGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */; };
 		83EE1AF127A1EDB200A1434A /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AF027A1EDB200A1434A /* View+Extensions.swift */; };
+		83EE1AF527A1F18100A1434A /* Heartbeats.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 83EE1AF427A1F18100A1434A /* Heartbeats.ahap */; };
+		83EE1AF727A1F50300A1434A /* Test.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 83EE1AF627A1F50300A1434A /* Test.ahap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActionHandler.swift; sourceTree = "<group>"; };
 		83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTickGenerator.swift; sourceTree = "<group>"; };
 		83EE1AF027A1EDB200A1434A /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		83EE1AF427A1F18100A1434A /* Heartbeats.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Heartbeats.ahap; sourceTree = "<group>"; };
+		83EE1AF627A1F50300A1434A /* Test.ahap */ = {isa = PBXFileReference; lastKnownFileType = text; path = Test.ahap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 		833F37CE279DA88D0065B692 /* SnakeSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				83EE1AF327A1F17400A1434A /* Resources */,
 				83EE1AE727A1DFBE00A1434A /* Game Controller */,
 				833F37FE279DAD3A0065B692 /* Models */,
 				833F37F9279DAA430065B692 /* Views */,
@@ -216,6 +221,15 @@
 				83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */,
 			);
 			path = "Game Controller";
+			sourceTree = "<group>";
+		};
+		83EE1AF327A1F17400A1434A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				83EE1AF427A1F18100A1434A /* Heartbeats.ahap */,
+				83EE1AF627A1F50300A1434A /* Test.ahap */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,7 +337,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				833F37D7279DA88F0065B692 /* Preview Assets.xcassets in Resources */,
+				83EE1AF727A1F50300A1434A /* Test.ahap in Resources */,
 				833F37D4279DA88F0065B692 /* Assets.xcassets in Resources */,
+				83EE1AF527A1F18100A1434A /* Heartbeats.ahap in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
