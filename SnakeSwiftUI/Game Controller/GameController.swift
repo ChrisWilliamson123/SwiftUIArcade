@@ -29,23 +29,6 @@ class GameController: ObservableObject {
         gamePadHandler.delegate = self
     }
     
-    func handleDirectionChange(_ direction: Direction) {
-        // Only change direction if it's not in same direction or reverse direction
-        guard direction != board.snake.direction && direction != board.snake.reverseDirection && canMove else { return }
-        do {
-            var newBoard = try board.movingSnake(direction)
-            if newBoard.foodEaten {
-                score += 1
-                gameSpeed *= 0.9
-                let newFoodLocation = newBoard.newFoodLocation
-                newBoard = GameBoard(snake: Snake(direction: newBoard.snake.direction, cells: newBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation)
-            }
-            board = newBoard
-        } catch {
-            gameOver()
-        }
-    }
-    
     private func handleTick() {
         let current = Date().timeIntervalSince1970
         if current - latestMoveTime > gameSpeed {
@@ -56,8 +39,18 @@ class GameController: ObservableObject {
     
     private func executeNextMove() {
         guard canMove else { return }
+        move()
+    }
+    
+    private func handleDirectionChange(_ direction: Direction) {
+        // Only change direction if it's not in same direction or reverse direction
+        guard direction != board.snake.direction && direction != board.snake.reverseDirection && canMove else { return }
+        move(direction)
+    }
+    
+    private func move(_ direction: Direction? = nil) {
         do {
-            var newBoard = try board.movingSnake(board.snake.direction)
+            var newBoard = try board.movingSnake(direction ?? board.snake.direction)
             if newBoard.foodEaten {
                 score += 1
                 gameSpeed *= 0.9

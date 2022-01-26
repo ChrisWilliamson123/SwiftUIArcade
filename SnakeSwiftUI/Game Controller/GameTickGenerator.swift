@@ -1,3 +1,5 @@
+import Foundation
+
 class GameTickGenerator {
     private var timer: Timer!
     private let tickHandler: () -> Void
