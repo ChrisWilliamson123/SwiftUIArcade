@@ -29,6 +29,7 @@
 		83EE1AEB27A1DFFC00A1434A /* GamePadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEA27A1DFFC00A1434A /* GamePadHandler.swift */; };
 		83EE1AED27A1E0B900A1434A /* GameActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */; };
 		83EE1AEF27A1E4A700A1434A /* GameTickGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */; };
+		83EE1AF127A1EDB200A1434A /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AF027A1EDB200A1434A /* View+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		83EE1AEA27A1DFFC00A1434A /* GamePadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePadHandler.swift; sourceTree = "<group>"; };
 		83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActionHandler.swift; sourceTree = "<group>"; };
 		83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTickGenerator.swift; sourceTree = "<group>"; };
+		83EE1AF027A1EDB200A1434A /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			children = (
 				83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */,
 				83EE1AE427A1DA3100A1434A /* Image+Extensions.swift */,
+				83EE1AF027A1EDB200A1434A /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */,
 				833F37D0279DA88D0065B692 /* SnakeSwiftUIApp.swift in Sources */,
 				83EE1AED27A1E0B900A1434A /* GameActionHandler.swift in Sources */,
+				83EE1AF127A1EDB200A1434A /* View+Extensions.swift in Sources */,
 				833F3808279DFB440065B692 /* GameBoard.swift in Sources */,
 				83EE1ADD27A1B45100A1434A /* Color+Extensions.swift in Sources */,
 				833F3800279DAD480065B692 /* Snake.swift in Sources */,

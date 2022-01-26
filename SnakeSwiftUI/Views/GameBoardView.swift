@@ -26,7 +26,9 @@ struct GameBoardView: View {
                     }
                 }
                 .background(.ultraThinMaterial)
-                .border(.primary)
+                .border(.purple)
+                .clipped()
+                .glow()
                 .frame(width: min(geo.size.height, geo.size.width), height: min(geo.size.height, geo.size.width))
             }
             .frame(minWidth: geo.size.width)
