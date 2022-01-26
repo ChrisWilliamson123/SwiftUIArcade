@@ -29,7 +29,6 @@ class GameController: ObservableObject {
     }
     
     @objc private func controllerDidConnect(notification: NSNotification) {
-        print("Controller did connect")
         guard let gameController = notification.object as? GCController, let gamePad = gameController.extendedGamepad else { return }
         gamePad.dpad.valueChangedHandler = handleGamePadDirectionalPadInput(dpad:x:y:)
         gamePad.buttonMenu.valueChangedHandler = handleMenuButtonPress(button:value:pressed:)

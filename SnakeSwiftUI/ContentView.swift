@@ -10,10 +10,6 @@ import SwiftUI
 struct ContentView: View {
     private let gridSize: Int = 20
     @StateObject var gameController = GameController()
-    
-    init() {
-        
-    }
 
     var body: some View {
         ZStack {
@@ -21,15 +17,14 @@ struct ContentView: View {
                 Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
                 GameBoardView(board: gameController.board, gridSize: gridSize)
                 Spacer()
-                //                DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
             }
-            .padding()
             
             if gameController.isPaused {
                 VStack(spacing: 16) {
                     Text("PAUSED").font(.largeTitle).foregroundColor(.primary)
                     Text("Press START to resume").foregroundColor(.action)
                 }
+                .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.ultraThinMaterial)
             }
@@ -37,12 +32,6 @@ struct ContentView: View {
                 GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)
             }
         }
-    }
-    
-    private func getGameBoardViewSize(using geometry: GeometryProxy) -> CGSize {
-        print(geometry.size)
-        let maximumAllowedSize = min(geometry.size.width, geometry.size.height - 200)
-        return CGSize(width: maximumAllowedSize, height: maximumAllowedSize)
     }
 }
 

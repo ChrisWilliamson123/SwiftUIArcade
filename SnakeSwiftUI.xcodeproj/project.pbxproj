@@ -17,7 +17,6 @@
 		833F37FD279DAB0B0065B692 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F37FC279DAB0B0065B692 /* GameBoardView.swift */; };
 		833F3800279DAD480065B692 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F37FF279DAD480065B692 /* Snake.swift */; };
 		833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3801279DBFA60065B692 /* DirectionButtonsView.swift */; };
-		833F3804279DC8200065B692 /* GameTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3803279DC8200065B692 /* GameTimer.swift */; };
 		833F3806279DCB3C0065B692 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3805279DCB3C0065B692 /* GameController.swift */; };
 		833F3808279DFB440065B692 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3807279DFB440065B692 /* GameBoard.swift */; };
 		83EE042527A094F400532F6D /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE042427A094F400532F6D /* GameOverView.swift */; };
@@ -56,7 +55,6 @@
 		833F37FC279DAB0B0065B692 /* GameBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		833F37FF279DAD480065B692 /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		833F3801279DBFA60065B692 /* DirectionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionButtonsView.swift; sourceTree = "<group>"; };
-		833F3803279DC8200065B692 /* GameTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimer.swift; sourceTree = "<group>"; };
 		833F3805279DCB3C0065B692 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		833F3807279DFB440065B692 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		83EE042427A094F400532F6D /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				833F37D1279DA88D0065B692 /* ContentView.swift */,
 				833F37D3279DA88F0065B692 /* Assets.xcassets */,
 				833F37D5279DA88F0065B692 /* Preview Content */,
-				833F3803279DC8200065B692 /* GameTimer.swift */,
 				833F3805279DCB3C0065B692 /* GameController.swift */,
 				83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */,
 			);
@@ -312,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				833F37D2279DA88D0065B692 /* ContentView.swift in Sources */,
-				833F3804279DC8200065B692 /* GameTimer.swift in Sources */,
 				833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */,
 				833F37D0279DA88D0065B692 /* SnakeSwiftUIApp.swift in Sources */,
 				833F3808279DFB440065B692 /* GameBoard.swift in Sources */,
