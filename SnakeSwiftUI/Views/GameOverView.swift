@@ -17,6 +17,8 @@ struct GameOverView: View {
             Text("Score: \(finalScore)").font(.title).foregroundColor(.primary)
             Text("Press START to start a new game.").font(.title).foregroundColor(.action)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.ultraThinMaterial)
     }
 }
 
