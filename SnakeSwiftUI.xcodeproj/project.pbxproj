@@ -22,6 +22,7 @@
 		833F3808279DFB440065B692 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3807279DFB440065B692 /* GameBoard.swift */; };
 		83EE042527A094F400532F6D /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE042427A094F400532F6D /* GameOverView.swift */; };
 		83EE042827A09FBA00532F6D /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EE042727A09FBA00532F6D /* GameController.framework */; };
+		83EE1ADD27A1B45100A1434A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		83EE042427A094F400532F6D /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		83EE042727A09FBA00532F6D /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		83EE042927A09FBA00532F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				833F37D5279DA88F0065B692 /* Preview Content */,
 				833F3803279DC8200065B692 /* GameTimer.swift */,
 				833F3805279DCB3C0065B692 /* GameController.swift */,
+				83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */,
 			);
 			path = SnakeSwiftUI;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */,
 				833F37D0279DA88D0065B692 /* SnakeSwiftUIApp.swift in Sources */,
 				833F3808279DFB440065B692 /* GameBoard.swift in Sources */,
+				83EE1ADD27A1B45100A1434A /* Color+Extensions.swift in Sources */,
 				833F3800279DAD480065B692 /* Snake.swift in Sources */,
 				833F37FD279DAB0B0065B692 /* GameBoardView.swift in Sources */,
 				83EE042527A094F400532F6D /* GameOverView.swift in Sources */,

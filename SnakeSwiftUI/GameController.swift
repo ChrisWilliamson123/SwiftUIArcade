@@ -11,7 +11,7 @@ import Combine
 import GameController
 
 class GameController: ObservableObject {
-    private static let startingGameSpeed: Double = 1
+    private static let startingGameSpeed: Double = 0.25
     private var timer: Timer!
     private var latestMoveTime: Double = Date().timeIntervalSince1970
     private var gameSpeed: Double = startingGameSpeed

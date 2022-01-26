@@ -20,13 +20,12 @@ struct ContentView: View {
             GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)
         } else {
             VStack(spacing: 16) {
-                Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.white)
+                Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
                 GameBoardView(board: gameController.board, gridSize: gridSize)
                 Spacer()
-                DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
+//                DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
             }
             .padding()
-            .background(.black)
         }
     }
     

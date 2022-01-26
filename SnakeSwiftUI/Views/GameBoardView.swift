@@ -25,21 +25,18 @@ struct GameBoardView: View {
                         }
                     }
                 }
-                .background(.black)
-                .border(.white)
+                .background(.background)
+                .border(.primary)
                 .frame(width: min(geo.size.height, geo.size.width), height: min(geo.size.height, geo.size.width))
             }
-            .background(.purple)
             .frame(minWidth: geo.size.width)
         }
     }
     
     private func getCellFill(cellCoord: Coordinate) -> some View {
-        if board.snake.head == cellCoord { return AnyView(Image(systemName: "play.fill").resizable().padding(twoPixelPadding).foregroundColor(.white).rotationEffect(.degrees(board.snake.direction.snakeHeadRotation))) }
-        if board.snake.cells.contains(cellCoord) { return AnyView(Image(systemName: "stop.fill").resizable().padding(twoPixelPadding).foregroundColor(.white)) }
-        if cellCoord == board.foodLocation { return AnyView(Image(systemName: "ant.fill").resizable().foregroundColor(.red)) }
-//        if board.snake.cells.contains(cellCoord) { return AnyView(Rectangle().fill(.white)) }
-//        if cellCoord == board.foodLocation { return Rectangle().fill(.red) }
+        if board.snake.head == cellCoord { return AnyView(Image(systemName: "play.fill").resizable().padding(twoPixelPadding).foregroundColor(.primary).rotationEffect(.degrees(board.snake.direction.snakeHeadRotation))) }
+        if board.snake.cells.contains(cellCoord) { return AnyView(Image(systemName: "stop.fill").resizable().padding(twoPixelPadding).foregroundColor(.primary)) }
+        if cellCoord == board.foodLocation { return AnyView(Image(systemName: "ant.fill").resizable().foregroundColor(Color(UIColor.systemRed))) }
         return AnyView(Rectangle().fill(.clear))
     }
 }

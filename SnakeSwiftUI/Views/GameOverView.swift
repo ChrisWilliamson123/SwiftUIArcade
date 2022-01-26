@@ -12,9 +12,11 @@ struct GameOverView: View {
     let finalScore: Int
 
     var body: some View {
-        Text("GAME OVER!").font(.largeTitle).foregroundColor(.red)
-        Text("Score: \(finalScore)").font(.title)
-        Button("New Game", action: { newGameAction() })
+        VStack {
+            Text("GAME OVER!").font(.largeTitle).foregroundColor(Color(UIColor.systemRed))
+            Text("Score: \(finalScore)").font(.title)
+            Button("New Game", action: { newGameAction() })
+        }
     }
 }
 
