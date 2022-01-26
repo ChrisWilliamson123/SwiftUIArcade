@@ -18,8 +18,8 @@ struct ContentView: View {
             if gameController.isPaused {
                 GamePausedView()
             }
-            else if gameController.gameOver {
-                GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)
+            else if gameController.gameIsOver {
+                GameOverView(newGameAction: gameController.reset, finalScore: gameController.score)
             }
         }.background(Image("background").centerCropped().ignoresSafeArea())
     }

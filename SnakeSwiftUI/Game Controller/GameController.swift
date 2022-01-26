@@ -8,71 +8,25 @@
 import Foundation
 import Combine
 
-import GameController
-
 class GameController: ObservableObject {
     private static let startingGameSpeed: Double = 0.25
     private var timer: Timer!
     private var latestMoveTime: Double = Date().timeIntervalSince1970
     private var gameSpeed: Double = startingGameSpeed
+    private let gamePadHandler = GamePadHandler()
     
     @Published var board: GameBoard = GameBoard.startingBoad
     @Published var score: Int = 0
-    @Published var gameOver: Bool = false
+    @Published var gameIsOver: Bool = false
     @Published var isPaused: Bool = false {
         didSet { isPaused ? pause() : resume() }
     }
     
-    var canMove: Bool { !isPaused && !gameOver }
+    var canMove: Bool { !isPaused && !gameIsOver }
 
     init() {
         createTimer()
-        NotificationCenter.default.addObserver(self, selector: #selector(controllerDidConnect), name: .GCControllerDidConnect, object: nil)
-    }
-    
-    @objc private func controllerDidConnect(notification: NSNotification) {
-        guard let gameController = notification.object as? GCController, let gamePad = gameController.extendedGamepad else { return }
-        gamePad.dpad.valueChangedHandler = handleGamePadDirectionalPadInput(dpad:x:y:)
-        gamePad.buttonMenu.valueChangedHandler = handleMenuButtonPress(button:value:pressed:)
-    }
-    
-    func resetGame() {
-        latestMoveTime = Date().timeIntervalSince1970
-        gameSpeed = Self.startingGameSpeed
-        score = 0
-        board = GameBoard.startingBoad
-        gameOver = false
-        createTimer()
-    }
-    
-    private func pause() {
-        timer.invalidate()
-    }
-    
-    private func resume() {
-        createTimer()
-    }
-    
-    private func handleMenuButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
-        guard pressed else { return }
-        
-        if gameOver {
-            resetGame()
-            return
-        }
-        
-        isPaused.toggle()
-    }
-    
-    private func handleGamePadDirectionalPadInput(dpad: GCControllerDirectionPad, x: Float, y: Float) -> Void {
-        let directionMap: [Coordinate: Direction] = [
-            .init(0, 1): .up,
-            .init(1, 0): .right,
-            .init(0, -1): .down,
-            .init(-1, 0): .left
-        ]
-        guard let direction = directionMap[Coordinate(Int(x), Int(y))] else { return }
-        handleDirectionChange(direction)
+        gamePadHandler.delegate = self
     }
     
     func handleDirectionChange(_ direction: Direction) {
@@ -88,7 +42,7 @@ class GameController: ObservableObject {
             }
             board = newBoard
         } catch {
-            initiateGameOver()
+            gameOver()
         }
     }
     
@@ -100,7 +54,6 @@ class GameController: ObservableObject {
         let current = Date().timeIntervalSince1970
         if current - latestMoveTime > gameSpeed {
             latestMoveTime = current
-            print("Time for a timed move!", latestMoveTime)
             executeNextMove()
         }
     }
@@ -117,12 +70,42 @@ class GameController: ObservableObject {
             }
             board = newBoard
         } catch {
-            initiateGameOver()
+            gameOver()
         }
     }
+}
+
+extension GameController: GamePadInputDelegate {
+    func menuButtonPressed() {
+        if gameIsOver { reset() }
+        else { isPaused.toggle() }
+    }
     
-    private func initiateGameOver() {
-        gameOver = true
+    func directionalPadPressed(direction: Direction) {
+        handleDirectionChange(direction)
+    }
+}
+
+extension GameController: GameActionHandler {
+    func pause() {
+        timer.invalidate()
+    }
+    
+    func resume() {
+        createTimer()
+    }
+    
+    func reset() {
+        latestMoveTime = Date().timeIntervalSince1970
+        gameSpeed = Self.startingGameSpeed
+        score = 0
+        board = GameBoard.startingBoad
+        gameIsOver = false
+        createTimer()
+    }
+    
+    func gameOver() {
+        gameIsOver = true
         timer.invalidate()
     }
 }
