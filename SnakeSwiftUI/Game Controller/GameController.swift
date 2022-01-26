@@ -10,22 +10,22 @@ import Combine
 
 class GameController: ObservableObject {
     private static let startingGameSpeed: Double = 0.25
-    private var timer: Timer!
+    
     private var latestMoveTime: Double = Date().timeIntervalSince1970
     private var gameSpeed: Double = startingGameSpeed
+    private var tickGenerator: GameTickGenerator!
+    
     private let gamePadHandler = GamePadHandler()
     
     @Published var board: GameBoard = GameBoard.startingBoad
     @Published var score: Int = 0
     @Published var gameIsOver: Bool = false
-    @Published var isPaused: Bool = false {
-        didSet { isPaused ? pause() : resume() }
-    }
+    @Published var isPaused: Bool = false { didSet { isPaused ? pause() : resume() } }
     
-    var canMove: Bool { !isPaused && !gameIsOver }
+    private var canMove: Bool { !isPaused && !gameIsOver }
 
     init() {
-        createTimer()
+        tickGenerator = GameTickGenerator(tickHandler: handleTick)
         gamePadHandler.delegate = self
     }
     
@@ -44,10 +44,6 @@ class GameController: ObservableObject {
         } catch {
             gameOver()
         }
-    }
-    
-    private func createTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.0167, repeats: true) { [weak self] _ in self?.handleTick() }
     }
     
     private func handleTick() {
@@ -88,11 +84,11 @@ extension GameController: GamePadInputDelegate {
 
 extension GameController: GameActionHandler {
     func pause() {
-        timer.invalidate()
+        tickGenerator.pause()
     }
     
     func resume() {
-        createTimer()
+        tickGenerator.restart()
     }
     
     func reset() {
@@ -101,11 +97,11 @@ extension GameController: GameActionHandler {
         score = 0
         board = GameBoard.startingBoad
         gameIsOver = false
-        createTimer()
+        tickGenerator.restart()
     }
     
     func gameOver() {
         gameIsOver = true
-        timer.invalidate()
+        tickGenerator.pause()
     }
 }
