@@ -8,25 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let gridSize: Int = 20
+    private let boardSize: Int = 20
     @StateObject var gameController = GameController()
 
     var body: some View {
         ZStack {
-            VStack(spacing: 16) {
-                Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
-                GameBoardView(board: gameController.board, gridSize: gridSize)
-                Spacer()
-            }
+            MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize)
             
             if gameController.isPaused {
-                VStack(spacing: 16) {
-                    Text("PAUSED").font(.largeTitle).foregroundColor(.primary)
-                    Text("Press START to resume").foregroundColor(.action)
-                }
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.ultraThinMaterial)
+                GamePausedView()
             }
             else if gameController.gameOver {
                 GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)

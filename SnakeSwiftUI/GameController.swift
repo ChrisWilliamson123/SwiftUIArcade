@@ -22,6 +22,8 @@ class GameController: ObservableObject {
     @Published var isPaused: Bool = false {
         didSet { isPaused ? pause() : resume() }
     }
+    
+    var canMove: Bool { !isPaused && !gameOver }
 
     init() {
         createTimer()
@@ -75,7 +77,7 @@ class GameController: ObservableObject {
     
     func handleDirectionChange(_ direction: Direction) {
         // Only change direction if it's not in same direction or reverse direction
-        guard direction != board.snake.direction && direction != board.snake.reverseDirection else { return }
+        guard direction != board.snake.direction && direction != board.snake.reverseDirection && canMove else { return }
         do {
             var newBoard = try board.movingSnake(direction)
             if newBoard.foodEaten {
@@ -104,6 +106,7 @@ class GameController: ObservableObject {
     }
     
     private func executeNextMove() {
+        guard canMove else { return }
         do {
             var newBoard = try board.movingSnake(board.snake.direction)
             if newBoard.foodEaten {
