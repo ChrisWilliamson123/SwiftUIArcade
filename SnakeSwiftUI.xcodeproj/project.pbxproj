@@ -24,6 +24,7 @@
 		83EE1ADD27A1B45100A1434A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */; };
 		83EE1AE127A1D26100A1434A /* GamePausedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AE027A1D26100A1434A /* GamePausedView.swift */; };
 		83EE1AE327A1D2E100A1434A /* MainGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AE227A1D2E100A1434A /* MainGameView.swift */; };
+		83EE1AE527A1DA3100A1434A /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AE427A1DA3100A1434A /* Image+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		83EE1AE027A1D26100A1434A /* GamePausedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePausedView.swift; sourceTree = "<group>"; };
 		83EE1AE227A1D2E100A1434A /* MainGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGameView.swift; sourceTree = "<group>"; };
+		83EE1AE427A1DA3100A1434A /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,15 +119,15 @@
 		833F37CE279DA88D0065B692 /* SnakeSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				83EE042927A09FBA00532F6D /* Info.plist */,
+				833F3805279DCB3C0065B692 /* GameController.swift */,
 				833F37FE279DAD3A0065B692 /* Models */,
 				833F37F9279DAA430065B692 /* Views */,
+				83EE1AE627A1DA4500A1434A /* Extensions */,
 				833F37CF279DA88D0065B692 /* SnakeSwiftUIApp.swift */,
 				833F37D1279DA88D0065B692 /* ContentView.swift */,
 				833F37D3279DA88F0065B692 /* Assets.xcassets */,
 				833F37D5279DA88F0065B692 /* Preview Content */,
-				833F3805279DCB3C0065B692 /* GameController.swift */,
-				83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */,
+				83EE042927A09FBA00532F6D /* Info.plist */,
 			);
 			path = SnakeSwiftUI;
 			sourceTree = "<group>";
@@ -182,6 +184,15 @@
 				83EE042727A09FBA00532F6D /* GameController.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83EE1AE627A1DA4500A1434A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */,
+				83EE1AE427A1DA3100A1434A /* Image+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +328,7 @@
 				83EE1AE327A1D2E100A1434A /* MainGameView.swift in Sources */,
 				83EE1AE127A1D26100A1434A /* GamePausedView.swift in Sources */,
 				833F37D2279DA88D0065B692 /* ContentView.swift in Sources */,
+				83EE1AE527A1DA3100A1434A /* Image+Extensions.swift in Sources */,
 				833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */,
 				833F37D0279DA88D0065B692 /* SnakeSwiftUIApp.swift in Sources */,
 				833F3808279DFB440065B692 /* GameBoard.swift in Sources */,
