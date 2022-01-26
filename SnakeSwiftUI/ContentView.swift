@@ -13,7 +13,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize)
+            MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize).padding()
             
             if gameController.isPaused {
                 GamePausedView()
@@ -21,12 +21,24 @@ struct ContentView: View {
             else if gameController.gameOver {
                 GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)
             }
-        }
+        }.background(Image("background").centerCropped().ignoresSafeArea())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+extension Image {
+    func centerCropped() -> some View {
+        GeometryReader { geo in
+            self
+            .resizable()
+            .scaledToFill()
+            .frame(width: geo.size.width, height: geo.size.height)
+            .clipped()
+        }
     }
 }
