@@ -19,12 +19,13 @@ class GameController: ObservableObject {
     @Published var board: GameBoard = GameBoard.startingBoad
     @Published var score: Int = 0
     @Published var gameOver: Bool = false
+    @Published var isPaused: Bool = false {
+        didSet { isPaused ? pause() : resume() }
+    }
 
     init() {
         createTimer()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(controllerDidConnect), name: .GCControllerDidConnect, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: , name: .gc, object: nil)
     }
     
     @objc private func controllerDidConnect(notification: NSNotification) {
@@ -43,9 +44,23 @@ class GameController: ObservableObject {
         createTimer()
     }
     
+    private func pause() {
+        timer.invalidate()
+    }
+    
+    private func resume() {
+        createTimer()
+    }
+    
     private func handleMenuButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
-        if gameOver { resetGame() }
+        
+        if gameOver {
+            resetGame()
+            return
+        }
+        
+        isPaused.toggle()
     }
     
     private func handleGamePadDirectionalPadInput(dpad: GCControllerDirectionPad, x: Float, y: Float) -> Void {

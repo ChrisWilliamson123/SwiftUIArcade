@@ -15,7 +15,7 @@ struct GameOverView: View {
         VStack(spacing: 16) {
             Text("GAME OVER!").font(.largeTitle).foregroundColor(Color(UIColor.systemRed))
             Text("Score: \(finalScore)").font(.title).foregroundColor(.primary)
-            Text("Press START to start a new game.").font(.title).foregroundColor(.primary)
+            Text("Press START to start a new game.").font(.title).foregroundColor(.action)
         }
     }
 }

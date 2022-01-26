@@ -19,13 +19,24 @@ struct ContentView: View {
         if gameController.gameOver {
             GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)
         } else {
-            VStack(spacing: 16) {
-                Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
-                GameBoardView(board: gameController.board, gridSize: gridSize)
-                Spacer()
-//                DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
+            ZStack {
+                VStack(spacing: 16) {
+                    Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
+                    GameBoardView(board: gameController.board, gridSize: gridSize)
+                    Spacer()
+                    //                DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
+                }
+                .padding()
+                
+                if gameController.isPaused {
+                    VStack(spacing: 16) {
+                        Text("PAUSED").font(.largeTitle).foregroundColor(.primary)
+                        Text("Press START to resume").foregroundColor(.action)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.ultraThinMaterial)
+                }
             }
-            .padding()
         }
     }
     
