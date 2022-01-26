@@ -31,6 +31,7 @@ class GameController: ObservableObject {
         print("Controller did connect")
         guard let gameController = notification.object as? GCController, let gamePad = gameController.extendedGamepad else { return }
         gamePad.dpad.valueChangedHandler = handleGamePadDirectionalPadInput(dpad:x:y:)
+        gamePad.buttonMenu.valueChangedHandler = handleMenuButtonPress(button:value:pressed:)
     }
     
     func resetGame() {
@@ -40,6 +41,11 @@ class GameController: ObservableObject {
         board = GameBoard.startingBoad
         gameOver = false
         createTimer()
+    }
+    
+    private func handleMenuButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
+        guard pressed else { return }
+        if gameOver { resetGame() }
     }
     
     private func handleGamePadDirectionalPadInput(dpad: GCControllerDirectionPad, x: Float, y: Float) -> Void {
