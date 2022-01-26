@@ -13,17 +13,25 @@ struct GameBoardView: View {
     let twoPixelPadding = EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
     
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach(0..<gridSize) { rowIndex in
-                HStack(spacing: 0) {
-                    ForEach(0..<gridSize) { colIndex in
-                        getCellFill(cellCoord: .init(colIndex, rowIndex))
+        GeometryReader { geo in
+            // Wrapping in a ZStack to ensure centering of inner views.
+            ZStack {
+                VStack(spacing: 0) {
+                    ForEach(0..<gridSize) { rowIndex in
+                        HStack(spacing: 0) {
+                            ForEach(0..<gridSize) { colIndex in
+                                getCellFill(cellCoord: .init(colIndex, rowIndex))
+                            }
+                        }
                     }
                 }
+                .background(.black)
+                .border(.white)
+                .frame(width: min(geo.size.height, geo.size.width), height: min(geo.size.height, geo.size.width))
             }
+            .background(.purple)
+            .frame(minWidth: geo.size.width)
         }
-        .background(.black)
-        .border(.white)
     }
     
     private func getCellFill(cellCoord: Coordinate) -> some View {

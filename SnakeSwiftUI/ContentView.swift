@@ -19,19 +19,21 @@ struct ContentView: View {
         if gameController.gameOver {
             GameOverView(newGameAction: gameController.resetGame, finalScore: gameController.score)
         } else {
-            GeometryReader { geo in
-                VStack(spacing: 16) {
-                    Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.white)
-                    GameBoardView(board: gameController.board, gridSize: gridSize)
-                        .frame(height: geo.size.width)
-                        
-                    Spacer()
-                    DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
-                }
+            VStack(spacing: 16) {
+                Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.white)
+                GameBoardView(board: gameController.board, gridSize: gridSize)
+                Spacer()
+                DirectionButtonsView(changeDirection: gameController.handleDirectionChange)
             }
             .padding()
             .background(.black)
         }
+    }
+    
+    private func getGameBoardViewSize(using geometry: GeometryProxy) -> CGSize {
+        print(geometry.size)
+        let maximumAllowedSize = min(geometry.size.width, geometry.size.height - 200)
+        return CGSize(width: maximumAllowedSize, height: maximumAllowedSize)
     }
 }
 
