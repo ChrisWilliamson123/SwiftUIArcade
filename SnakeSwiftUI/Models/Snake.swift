@@ -22,6 +22,25 @@ struct Snake: Equatable {
         
         return Snake(direction: direction, cells: cells.suffix(from: justEaten ? 0 : 1) + [newHead])
     }
+    
+    func wrapped(gameSize: Int) -> Snake {
+        let nonWrappedCells = self.cells
+        let wrappedCells: [Coordinate] = nonWrappedCells.map({
+            let x: Int
+            let y: Int
+            
+            if $0.x < 0 { x = gameSize - 1 }
+            else if $0.x == gameSize { x = 0 }
+            else { x = $0.x }
+            
+            if $0.y < 0 { y = gameSize - 1 }
+            else if $0.y == gameSize { y = 0 }
+            else { y = $0.y }
+            
+            return Coordinate(x, y)
+        })
+        return Snake(direction: self.direction, cells: wrappedCells)
+    }
 }
 
 enum Direction {

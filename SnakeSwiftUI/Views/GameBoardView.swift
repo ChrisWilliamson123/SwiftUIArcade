@@ -47,7 +47,7 @@ struct GameBoardView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            GameBoardView(board: GameBoard.startingBoad, gridSize: 20)
+            GameBoardView(board: GameBoard.getStartingBoard(using: GameSettings(canWrap: false)), gridSize: 20)
             Spacer()
         }
     }

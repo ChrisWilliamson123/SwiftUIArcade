@@ -23,6 +23,6 @@ struct MainGameView: View {
 
 struct MainGameView_Previews: PreviewProvider {
     static var previews: some View {
-        MainGameView(score: 10, board: GameBoard.startingBoad, boardSize: 20)
+        MainGameView(score: 10, board: GameBoard.getStartingBoard(using: GameSettings(canWrap: false)), boardSize: 20)
     }
 }

@@ -8,6 +8,19 @@
 import Foundation
 import Combine
 
+protocol GameSettingsDelegate: AnyObject {
+    func settingDidChange()
+}
+
+class GameSettings {
+    var canWrap: Bool { didSet { delegate.settingDidChange() } }
+    weak var delegate: GameSettingsDelegate!
+    
+    init(canWrap: Bool = false) {
+        self.canWrap = canWrap
+    }
+}
+
 class GameController: ObservableObject {
     private static let startingGameSpeed: Double = 0.25
     
@@ -16,8 +29,9 @@ class GameController: ObservableObject {
     private var tickGenerator: GameTickGenerator!
     
     private let gamePadHandler = GamePadHandler()
+    private var settings: GameSettings
     
-    @Published var board: GameBoard = GameBoard.startingBoad
+    @Published var board: GameBoard
     @Published var score: Int = 0
     @Published var gameIsOver: Bool = false
     @Published var isPaused: Bool = false { didSet { isPaused ? pause() : resume() } }
@@ -25,8 +39,11 @@ class GameController: ObservableObject {
     private var canMove: Bool { !isPaused && !gameIsOver }
 
     init() {
+        settings = GameSettings(canWrap: false)
+        board = GameBoard.getStartingBoard(using: settings)
         tickGenerator = GameTickGenerator(tickHandler: handleTick)
         gamePadHandler.delegate = self
+        settings.delegate = self
     }
     
     private func handleTick() {
@@ -55,7 +72,7 @@ class GameController: ObservableObject {
                 score += 1
                 gameSpeed *= 0.9
                 let newFoodLocation = newBoard.newFoodLocation
-                newBoard = GameBoard(snake: Snake(direction: newBoard.snake.direction, cells: newBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation)
+                newBoard = GameBoard(snake: Snake(direction: newBoard.snake.direction, cells: newBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation, canWrap: settings.canWrap)
             }
             board = newBoard
         } catch {
@@ -73,6 +90,10 @@ extension GameController: GamePadInputDelegate {
     func directionalPadPressed(direction: Direction) {
         handleDirectionChange(direction)
     }
+    
+    func buttonBPressed() {
+        settings.canWrap.toggle()
+    }
 }
 
 extension GameController: GameActionHandler {
@@ -88,7 +109,8 @@ extension GameController: GameActionHandler {
         latestMoveTime = Date().timeIntervalSince1970
         gameSpeed = Self.startingGameSpeed
         score = 0
-        board = GameBoard.startingBoad
+        
+        board = GameBoard.getStartingBoard(using: settings)
         gameIsOver = false
         tickGenerator.restart()
     }
@@ -96,5 +118,11 @@ extension GameController: GameActionHandler {
     func gameOver() {
         gameIsOver = true
         tickGenerator.pause()
+    }
+}
+
+extension GameController: GameSettingsDelegate {
+    func settingDidChange() {
+        board = GameBoard(snake: board.snake, foodLocation: board.foodLocation, canWrap: settings.canWrap)
     }
 }

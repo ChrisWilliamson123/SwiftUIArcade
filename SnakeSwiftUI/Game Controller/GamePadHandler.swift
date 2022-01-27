@@ -15,6 +15,7 @@ class GamePadHandler {
         gamePad.dpad.valueChangedHandler = handleGamePadDirectionalPadInput
         gamePad.buttonMenu.valueChangedHandler = handleMenuButtonPress
         gamePad.buttonA.valueChangedHandler = handleAButtonPress
+        gamePad.buttonB.valueChangedHandler = handleBButtonPress
 
         if let haptics = gamePad.controller?.haptics {
             hapticsEngine = haptics.createEngine(withLocality: .default)
@@ -29,7 +30,13 @@ class GamePadHandler {
     }
     
     private func handleAButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
+        guard pressed else { return }
         playHapticsFile()
+    }
+    
+    private func handleBButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
+        guard pressed else { return }
+        delegate.buttonBPressed()
     }
     
     private func handleGamePadDirectionalPadInput(dpad: GCControllerDirectionPad, x: Float, y: Float) -> Void {
