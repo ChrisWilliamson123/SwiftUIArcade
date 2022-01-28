@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct GamePausedView: View {
+    @ObservedObject var settings: GameSettings
+
     var body: some View {
         VStack(spacing: 16) {
             Text("PAUSED").font(.largeTitle).foregroundColor(.primary)
+            List(settings.settingsList, id: \.self) {
+                Button("\($0.name): \($0.status)", action: $0.action)
+            }
             Text("Press START to resume").foregroundColor(.action)
         }
         .padding()
@@ -21,6 +26,6 @@ struct GamePausedView: View {
 
 struct GamePausedView_Previews: PreviewProvider {
     static var previews: some View {
-        GamePausedView()
+        GamePausedView(settings: GameSettings())
     }
 }

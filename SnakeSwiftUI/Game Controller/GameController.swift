@@ -12,12 +12,35 @@ protocol GameSettingsDelegate: AnyObject {
     func settingDidChange()
 }
 
-class GameSettings {
-    var canWrap: Bool { didSet { delegate.settingDidChange() } }
+class GameSettings: ObservableObject {
+    @Published var canWrap: Bool { didSet { delegate.settingDidChange() } }
     weak var delegate: GameSettingsDelegate!
+    
+    var settingsList: [SettingsListEntry] {
+        [
+            .init(name: "Wrapping", status: canWrap ? "ON" : "OFF", action: { self.canWrap.toggle() } )
+        ]
+    }
     
     init(canWrap: Bool = false) {
         self.canWrap = canWrap
+    }
+    
+    struct SettingsListEntry: Hashable {
+        static func == (lhs: GameSettings.SettingsListEntry, rhs: GameSettings.SettingsListEntry) -> Bool {
+            lhs.name == rhs.name && lhs.status == rhs.status
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(name)
+            hasher.combine(status)
+        }
+        
+        let name: String
+        let status: String
+        let action: () -> Void
+        
+        
     }
 }
 
@@ -29,7 +52,7 @@ class GameController: ObservableObject {
     private var tickGenerator: GameTickGenerator!
     
     private let gamePadHandler = GamePadHandler()
-    private var settings: GameSettings
+    var settings: GameSettings
     
     @Published var board: GameBoard
     @Published var score: Int = 0
@@ -37,21 +60,13 @@ class GameController: ObservableObject {
     @Published var isPaused: Bool = false { didSet { isPaused ? pause() : resume() } }
     
     private var canMove: Bool { !isPaused && !gameIsOver }
-
+    
     init() {
         settings = GameSettings(canWrap: false)
         board = GameBoard.getStartingBoard(using: settings)
         tickGenerator = GameTickGenerator(tickHandler: handleTick)
         gamePadHandler.delegate = self
         settings.delegate = self
-    }
-    
-    private func handleTick() {
-        let current = Date().timeIntervalSince1970
-        if current - latestMoveTime > gameSpeed {
-            latestMoveTime = current
-            executeNextMove()
-        }
     }
     
     private func executeNextMove() {
@@ -77,6 +92,17 @@ class GameController: ObservableObject {
             board = newBoard
         } catch {
             gameOver()
+        }
+    }
+}
+
+// MARK: - Timing
+extension GameController {
+    private func handleTick() {
+        let current = Date().timeIntervalSince1970
+        if current - latestMoveTime > gameSpeed {
+            latestMoveTime = current
+            executeNextMove()
         }
     }
 }

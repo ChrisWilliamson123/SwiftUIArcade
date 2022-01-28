@@ -16,7 +16,7 @@ struct ContentView: View {
             MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize).padding()
             
             if gameController.isPaused {
-                GamePausedView()
+                GamePausedView(settings: gameController.settings)
             }
             else if gameController.gameIsOver {
                 GameOverView(newGameAction: gameController.reset, finalScore: gameController.score)
