@@ -15,7 +15,7 @@ class GameController: ObservableObject {
     private var gameSpeed: Double = startingGameSpeed
     private var tickGenerator: GameTickGenerator!
     
-    private let gamePadHandler = GamePadHandler()
+//    private let gamePadHandler = GamePadHandler()
     var settings: GameSettings
     
     @Published var board: GameBoard
@@ -29,7 +29,7 @@ class GameController: ObservableObject {
         settings = GameSettings(canWrap: false)
         board = GameBoard.getStartingBoard(using: settings)
         tickGenerator = GameTickGenerator(tickHandler: handleTick)
-        gamePadHandler.delegate = self
+//        gamePadHandler.delegate = self
         settings.delegate = self
     }
     
@@ -38,7 +38,7 @@ class GameController: ObservableObject {
         move()
     }
     
-    private func handleDirectionChange(_ direction: Direction) {
+    func handleDirectionChange(_ direction: Direction) {
         // Only change direction if it's not in same direction or reverse direction
         guard direction != board.snake.direction && direction != board.snake.reverseDirection && canMove else { return }
         move(direction)
@@ -71,20 +71,20 @@ extension GameController {
     }
 }
 
-extension GameController: GamePadInputDelegate {
-    func menuButtonPressed() {
-        if gameIsOver { reset() }
-        else { isPaused.toggle() }
-    }
-    
-    func directionalPadPressed(direction: Direction) {
-        handleDirectionChange(direction)
-    }
-    
-    func buttonBPressed() {
-        settings.canWrap.toggle()
-    }
-}
+//extension GameController: GamePadInputReceiver {
+//    func menuButtonPressed() {
+//        if gameIsOver { reset() }
+//        else { isPaused.toggle() }
+//    }
+//    
+//    func directionalPadPressed(direction: Direction) {
+//        handleDirectionChange(direction)
+//    }
+//    
+//    func buttonBPressed() {
+//        settings.canWrap.toggle()
+//    }
+//}
 
 extension GameController: GameActionHandler {
     func pause() {

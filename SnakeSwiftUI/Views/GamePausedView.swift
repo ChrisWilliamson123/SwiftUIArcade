@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct GamePausedView: View {
+    private let identifier = "GamePausedView"
     @ObservedObject var settings: GameSettings
+    @Binding var isPaused: Bool
 
     var body: some View {
         VStack(spacing: 16) {
@@ -21,11 +23,31 @@ struct GamePausedView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ultraThinMaterial)
+        .onAppear {
+            GamePadHandler.default.receivers.append((identifier, self))
+        }
+        .onDisappear {
+            GamePadHandler.default.receivers.removeAll(where: { $0.id == identifier })
+        }
+    }
+}
+
+extension GamePausedView: GamePadInputReceiver {
+    func menuButtonPressed() {
+        isPaused = false
+    }
+    
+    func directionalPadPressed(direction: Direction) {
+        
+    }
+    
+    func buttonBPressed() {
+        
     }
 }
 
 struct GamePausedView_Previews: PreviewProvider {
     static var previews: some View {
-        GamePausedView(settings: GameSettings())
+        GamePausedView(settings: GameSettings(), isPaused: .constant(false))
     }
 }

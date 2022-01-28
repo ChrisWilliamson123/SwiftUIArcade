@@ -13,10 +13,10 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize).padding()
+            MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize, isPaused: $gameController.isPaused, gameController: gameController).padding()
             
             if gameController.isPaused {
-                GamePausedView(settings: gameController.settings)
+                GamePausedView(settings: gameController.settings, isPaused: $gameController.isPaused)
             }
             else if gameController.gameIsOver {
                 GameOverView(newGameAction: gameController.reset, finalScore: gameController.score)

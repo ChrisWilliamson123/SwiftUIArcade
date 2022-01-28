@@ -2,7 +2,12 @@ import GameController
 import CoreHaptics
 
 class GamePadHandler {
-    weak var delegate: GamePadInputDelegate!
+    static var `default`: GamePadHandler = GamePadHandler()
+    var receivers: [(id: String, receiver: GamePadInputReceiver)] = []
+    var receiver: GamePadInputReceiver? {
+        print(receivers.count)
+        return receivers.last?.receiver
+    }
     private var hapticsEngine: CHHapticEngine?
     
     init() {
@@ -26,17 +31,17 @@ class GamePadHandler {
     private func handleMenuButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
         
-        delegate.menuButtonPressed()
+        receiver?.menuButtonPressed()
     }
     
     private func handleAButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
-        playHapticsFile()
+//        playHapticsFile()
     }
     
     private func handleBButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
-        delegate.buttonBPressed()
+//        delegate.buttonBPressed()
     }
     
     private func handleGamePadDirectionalPadInput(dpad: GCControllerDirectionPad, x: Float, y: Float) -> Void {
@@ -47,7 +52,8 @@ class GamePadHandler {
             .init(-1, 0): .left
         ]
         guard let direction = directionMap[Coordinate(Int(x), Int(y))] else { return }
-        delegate.directionalPadPressed(direction: direction)
+//        delegate.directionalPadPressed(direction: direction)
+        receiver?.directionalPadPressed(direction: direction)
     }
     
     private func playHapticsFile() {
