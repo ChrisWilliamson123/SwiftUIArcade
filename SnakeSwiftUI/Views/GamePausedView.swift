@@ -6,11 +6,29 @@
 //
 
 import SwiftUI
+import AVFoundation
+
+
+var audioPlayer: AVAudioPlayer?
+
+func playSound(sound: String, type: String) {
+    if let path = Bundle.main.path(forResource: sound, ofType: type) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            audioPlayer?.play()
+        } catch {
+            print("ERROR")
+        }
+    }
+}
 
 struct GamePausedView: View {
     @EnvironmentObject var settings: GameSettings
     @Binding var isPaused: Bool
     @State var selectedSettingIndex: Int = 0
+    
+    private let menuNavigationAudioPlayer = AudioPlayer(sound: .menuNavigate)
+    private let menuSelectionAudioPlayer = AudioPlayer(sound: .menuSelect)
 
     var body: some View {
         VStack(spacing: 16) {
@@ -40,14 +58,19 @@ extension GamePausedView: GamePadInputReceiver {
     
     func directionalPadPressed(direction: Direction) {
         switch direction {
-        case .up: selectedSettingIndex = max(selectedSettingIndex - 1, 0)
-        case .down: selectedSettingIndex = min(selectedSettingIndex + 1, settings.settingsList.count - 1)
+        case .up:
+            menuNavigationAudioPlayer.playSound()
+            selectedSettingIndex = max(selectedSettingIndex - 1, 0)
+        case .down:
+            menuNavigationAudioPlayer.playSound()
+            selectedSettingIndex = min(selectedSettingIndex + 1, settings.settingsList.count - 1)
         default: break
         }
     }
     
     func buttonAPressed() {
         settings.settingsList[selectedSettingIndex].action()
+        menuSelectionAudioPlayer.playSound()
     }
 }
 

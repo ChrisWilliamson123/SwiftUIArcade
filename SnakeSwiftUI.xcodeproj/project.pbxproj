@@ -23,6 +23,9 @@
 		835E06A527A5D10000521849 /* MovePerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E06A427A5D10000521849 /* MovePerformer.swift */; };
 		835E06A727A5D11900521849 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E06A627A5D11900521849 /* ScoreManager.swift */; };
 		835E06AB27A5D8F800521849 /* ControllerDisconnectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E06AA27A5D8F800521849 /* ControllerDisconnectedView.swift */; };
+		835E06AE27A5DD4800521849 /* menu_navigate.wav in Resources */ = {isa = PBXBuildFile; fileRef = 835E06AD27A5DD4800521849 /* menu_navigate.wav */; };
+		835E06B027A5DD6600521849 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E06AF27A5DD6600521849 /* AudioPlayer.swift */; };
+		835E06B227A5E22D00521849 /* menu_select.wav in Resources */ = {isa = PBXBuildFile; fileRef = 835E06B127A5E22D00521849 /* menu_select.wav */; };
 		83EE042527A094F400532F6D /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE042427A094F400532F6D /* GameOverView.swift */; };
 		83EE042827A09FBA00532F6D /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EE042727A09FBA00532F6D /* GameController.framework */; };
 		83EE1ADD27A1B45100A1434A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1ADC27A1B45100A1434A /* Color+Extensions.swift */; };
@@ -74,6 +77,9 @@
 		835E06A427A5D10000521849 /* MovePerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovePerformer.swift; sourceTree = "<group>"; };
 		835E06A627A5D11900521849 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		835E06AA27A5D8F800521849 /* ControllerDisconnectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerDisconnectedView.swift; sourceTree = "<group>"; };
+		835E06AD27A5DD4800521849 /* menu_navigate.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menu_navigate.wav; sourceTree = "<group>"; };
+		835E06AF27A5DD6600521849 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		835E06B127A5E22D00521849 /* menu_select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = menu_select.wav; sourceTree = "<group>"; };
 		83EE042427A094F400532F6D /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		83EE042727A09FBA00532F6D /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		83EE042927A09FBA00532F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +155,7 @@
 				83EE1AF327A1F17400A1434A /* Resources */,
 				833F37D5279DA88F0065B692 /* Preview Content */,
 				83EE042927A09FBA00532F6D /* Info.plist */,
+				835E06AF27A5DD6600521849 /* AudioPlayer.swift */,
 			);
 			path = SnakeSwiftUI;
 			sourceTree = "<group>";
@@ -210,6 +217,15 @@
 			path = "Game Pad";
 			sourceTree = "<group>";
 		};
+		835E06AC27A5DD3D00521849 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				835E06B127A5E22D00521849 /* menu_select.wav */,
+				835E06AD27A5DD4800521849 /* menu_navigate.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		83EE042627A09FBA00532F6D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +258,7 @@
 		83EE1AF327A1F17400A1434A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				835E06AC27A5DD3D00521849 /* Sounds */,
 				833F37D3279DA88F0065B692 /* Assets.xcassets */,
 				83EE1AF427A1F18100A1434A /* Heartbeats.ahap */,
 				83EE1AF627A1F50300A1434A /* Test.ahap */,
@@ -356,6 +373,8 @@
 				833F37D7279DA88F0065B692 /* Preview Assets.xcassets in Resources */,
 				83EE1AF727A1F50300A1434A /* Test.ahap in Resources */,
 				833F37D4279DA88F0065B692 /* Assets.xcassets in Resources */,
+				835E06AE27A5DD4800521849 /* menu_navigate.wav in Resources */,
+				835E06B227A5E22D00521849 /* menu_select.wav in Resources */,
 				83EE1AF527A1F18100A1434A /* Heartbeats.ahap in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +420,7 @@
 				83EE042527A094F400532F6D /* GameOverView.swift in Sources */,
 				835E06AB27A5D8F800521849 /* ControllerDisconnectedView.swift in Sources */,
 				83EE1AEF27A1E4A700A1434A /* GameTickGenerator.swift in Sources */,
+				835E06B027A5DD6600521849 /* AudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

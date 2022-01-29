@@ -3,7 +3,7 @@ import CoreHaptics
 import Combine
 
 class GamePadHandler: ObservableObject {
-    static var `default`: GamePadHandler = GamePadHandler()
+    static let `default`: GamePadHandler = GamePadHandler()
 
     var receivers: [(id: String, receiver: GamePadInputReceiver)] = []
     var receiver: GamePadInputReceiver? { receivers.last?.receiver }
