@@ -3,9 +3,11 @@ import CoreHaptics
 
 class GamePadHandler {
     static var `default`: GamePadHandler = GamePadHandler()
+
     var receivers: [(id: String, receiver: GamePadInputReceiver)] = []
     var receiver: GamePadInputReceiver? {
         print(receivers.count)
+        for r in receivers { print(r) }
         return receivers.last?.receiver
     }
     private var hapticsEngine: CHHapticEngine?

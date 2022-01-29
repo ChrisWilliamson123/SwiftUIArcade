@@ -23,12 +23,7 @@ struct GamePausedView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ultraThinMaterial)
-        .onAppear {
-            GamePadHandler.default.receivers.append((identifier, self))
-        }
-        .onDisappear {
-            GamePadHandler.default.receivers.removeAll(where: { $0.id == identifier })
-        }
+        
     }
 }
 

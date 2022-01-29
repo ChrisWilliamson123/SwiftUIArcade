@@ -14,8 +14,7 @@ class GameController: ObservableObject {
     private var latestMoveTime: Double = Date().timeIntervalSince1970
     private var gameSpeed: Double = startingGameSpeed
     private var tickGenerator: GameTickGenerator!
-    
-//    private let gamePadHandler = GamePadHandler()
+
     var settings: GameSettings
     
     @Published var board: GameBoard
@@ -29,7 +28,6 @@ class GameController: ObservableObject {
         settings = GameSettings(canWrap: false)
         board = GameBoard.getStartingBoard(using: settings)
         tickGenerator = GameTickGenerator(tickHandler: handleTick)
-//        gamePadHandler.delegate = self
         settings.delegate = self
     }
     
@@ -70,21 +68,6 @@ extension GameController {
         }
     }
 }
-
-//extension GameController: GamePadInputReceiver {
-//    func menuButtonPressed() {
-//        if gameIsOver { reset() }
-//        else { isPaused.toggle() }
-//    }
-//    
-//    func directionalPadPressed(direction: Direction) {
-//        handleDirectionChange(direction)
-//    }
-//    
-//    func buttonBPressed() {
-//        settings.canWrap.toggle()
-//    }
-//}
 
 extension GameController: GameActionHandler {
     func pause() {

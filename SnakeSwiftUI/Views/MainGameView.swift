@@ -20,8 +20,6 @@ struct MainGameView: View {
             Text("Score: \(score)").font(.largeTitle).foregroundColor(.primary)
             GameBoardView(board: board, gridSize: boardSize)
             Spacer()
-        }.onAppear {
-            GamePadHandler.default.receivers.append((identifier, self))
         }
     }
 }
