@@ -15,9 +15,12 @@ struct ContentView: View {
     private var gameSpeed: Double = 0.2
     @State private var latestMoveTime: Double = Date().timeIntervalSince1970
     
+    
+    // GAME
     @State private var board = GameBoard.getStartingBoard()
     @StateObject private var scoreManager = ScoreManager()
-    @State private var gameOver: Bool = false { didSet { if gameOver { tickGenerator.pause() } } }
+    @State private var gameOver: Bool = false
+    @State private var paused: Bool = false
     
     init() {
         tickGenerator = GameTickGenerator()
@@ -25,18 +28,23 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainGameView(board: $board, gameOver: $gameOver, scoreManager: scoreManager, shouldGlow: .constant(true))
+            MainGameView(board: $board, gameOver: $gameOver, paused: $paused, scoreManager: scoreManager, shouldGlow: .constant(true))
                 .padding()
 
-//            if gameController.isPaused {
-//                GamePausedView(settings: gameController.settings, isPaused: $gameController.isPaused)
-//            }
-            if gameOver {
+            if paused {
+                GamePausedView(settings: GameSettings(), isPaused: $paused)
+            }
+            else if gameOver {
                 GameOverView(newGameAction: resetGame, finalScore: scoreManager.score)
             }
         }
         .background(Image("background").centerCropped().ignoresSafeArea())
-        .onAppear(perform: { tickGenerator.tickHandler = performTimedMove })
+        .onAppear(perform: {
+            print("On appear called")
+            tickGenerator.tickHandler = performTimedMove
+        })
+        .onChange(of: gameOver, perform: { if $0 { tickGenerator.pause()} })
+        .onChange(of: paused, perform: { $0 ? tickGenerator.pause() : tickGenerator.restart() })
     }
     
     private func resetGame() {
@@ -50,6 +58,7 @@ struct ContentView: View {
 
 extension ContentView {
     func performTimedMove() {
+        print("timed move", Date())
         let currentTimeInterval = Date().timeIntervalSince1970
         if currentTimeInterval - latestMoveTime > gameSpeed {
             latestMoveTime = currentTimeInterval
@@ -61,29 +70,6 @@ extension ContentView {
             }
         }
     }
-}
-
-struct MovePerformer {
-    let scoreManager: ScoreManager
-
-    func move(_ board: GameBoard, _ direction: Direction? = nil) throws -> GameBoard {
-        do {
-            let newBoard = try board.movingSnake(direction ?? board.snake.direction)
-            return newBoard.foodEaten ? handleFoodCollision(collidingBoard: newBoard) : newBoard
-        } catch {
-            throw error
-        }
-    }
-    
-    private func handleFoodCollision(collidingBoard: GameBoard) -> GameBoard {
-        scoreManager.score += 1
-        let newFoodLocation = collidingBoard.newFoodLocation
-        return GameBoard(snake: Snake(direction: collidingBoard.snake.direction, cells: collidingBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation, canWrap: collidingBoard.canWrap)
-    }
-}
-
-final class ScoreManager: ObservableObject {
-    @Published var score = 0
 }
 
 struct ContentView_Previews: PreviewProvider {

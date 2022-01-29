@@ -11,6 +11,7 @@ struct MainGameView: View {
 //    let boardSize: Int
     @Binding var board: GameBoard
     @Binding var gameOver: Bool
+    @Binding var paused: Bool
     @ObservedObject var scoreManager: ScoreManager
     @Binding var shouldGlow: Bool
     
@@ -28,10 +29,9 @@ struct MainGameView: View {
 }
 
 extension MainGameView: GamePadInputReceiver {
-//    func menuButtonPressed() {
-//        print("Menu button pressed in main game view")
-//        gameController.isPaused = true
-//    }
+    func menuButtonPressed() {
+        paused = true
+    }
     
     func directionalPadPressed(direction: Direction) {
         handleDirectionChange(direction)
