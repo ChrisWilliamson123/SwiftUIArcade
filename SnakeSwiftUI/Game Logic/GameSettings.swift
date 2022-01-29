@@ -1,9 +1,5 @@
 import Combine
 
-//protocol GameSettingsDelegate: AnyObject {
-//    func settingDidChange()
-//}
-
 class GameSettings: ObservableObject {
     @Published var canWrap: Bool = false
     @Published var glowEnabled: Bool = true

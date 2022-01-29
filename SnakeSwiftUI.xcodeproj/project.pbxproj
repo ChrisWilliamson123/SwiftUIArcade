@@ -17,7 +17,6 @@
 		833F37FD279DAB0B0065B692 /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F37FC279DAB0B0065B692 /* GameBoardView.swift */; };
 		833F3800279DAD480065B692 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F37FF279DAD480065B692 /* Snake.swift */; };
 		833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3801279DBFA60065B692 /* DirectionButtonsView.swift */; };
-		833F3806279DCB3C0065B692 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3805279DCB3C0065B692 /* GameController.swift */; };
 		833F3808279DFB440065B692 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F3807279DFB440065B692 /* GameBoard.swift */; };
 		835E06A027A458BA00521849 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E069F27A458BA00521849 /* GameSettings.swift */; };
 		835E06A327A587FE00521849 /* GamePadReceivingViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E06A227A587FE00521849 /* GamePadReceivingViewModifier.swift */; };
@@ -31,7 +30,6 @@
 		83EE1AE527A1DA3100A1434A /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AE427A1DA3100A1434A /* Image+Extensions.swift */; };
 		83EE1AE927A1DFE300A1434A /* GamePadInputReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AE827A1DFE200A1434A /* GamePadInputReceiver.swift */; };
 		83EE1AEB27A1DFFC00A1434A /* GamePadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEA27A1DFFC00A1434A /* GamePadHandler.swift */; };
-		83EE1AED27A1E0B900A1434A /* GameActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */; };
 		83EE1AEF27A1E4A700A1434A /* GameTickGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */; };
 		83EE1AF127A1EDB200A1434A /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE1AF027A1EDB200A1434A /* View+Extensions.swift */; };
 		83EE1AF527A1F18100A1434A /* Heartbeats.ahap in Resources */ = {isa = PBXBuildFile; fileRef = 83EE1AF427A1F18100A1434A /* Heartbeats.ahap */; };
@@ -69,7 +67,6 @@
 		833F37FC279DAB0B0065B692 /* GameBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		833F37FF279DAD480065B692 /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		833F3801279DBFA60065B692 /* DirectionButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionButtonsView.swift; sourceTree = "<group>"; };
-		833F3805279DCB3C0065B692 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		833F3807279DFB440065B692 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		835E069F27A458BA00521849 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		835E06A227A587FE00521849 /* GamePadReceivingViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePadReceivingViewModifier.swift; sourceTree = "<group>"; };
@@ -84,7 +81,6 @@
 		83EE1AE427A1DA3100A1434A /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
 		83EE1AE827A1DFE200A1434A /* GamePadInputReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePadInputReceiver.swift; sourceTree = "<group>"; };
 		83EE1AEA27A1DFFC00A1434A /* GamePadHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePadHandler.swift; sourceTree = "<group>"; };
-		83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActionHandler.swift; sourceTree = "<group>"; };
 		83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTickGenerator.swift; sourceTree = "<group>"; };
 		83EE1AF027A1EDB200A1434A /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		83EE1AF427A1F18100A1434A /* Heartbeats.ahap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Heartbeats.ahap; sourceTree = "<group>"; };
@@ -141,19 +137,16 @@
 		833F37CE279DA88D0065B692 /* SnakeSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				835E06A127A587D400521849 /* GamePad */,
-				83EE1AF327A1F17400A1434A /* Resources */,
-				83EE1AE727A1DFBE00A1434A /* Game Controller */,
+				835E06A127A587D400521849 /* Game Pad */,
+				83EE1AE727A1DFBE00A1434A /* Game Logic */,
 				833F37FE279DAD3A0065B692 /* Models */,
 				833F37F9279DAA430065B692 /* Views */,
 				83EE1AE627A1DA4500A1434A /* Extensions */,
 				833F37CF279DA88D0065B692 /* SnakeSwiftUIApp.swift */,
 				833F37D1279DA88D0065B692 /* ContentView.swift */,
-				833F37D3279DA88F0065B692 /* Assets.xcassets */,
+				83EE1AF327A1F17400A1434A /* Resources */,
 				833F37D5279DA88F0065B692 /* Preview Content */,
 				83EE042927A09FBA00532F6D /* Info.plist */,
-				835E06A427A5D10000521849 /* MovePerformer.swift */,
-				835E06A627A5D11900521849 /* ScoreManager.swift */,
 			);
 			path = SnakeSwiftUI;
 			sourceTree = "<group>";
@@ -204,14 +197,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		835E06A127A587D400521849 /* GamePad */ = {
+		835E06A127A587D400521849 /* Game Pad */ = {
 			isa = PBXGroup;
 			children = (
 				83EE1AEA27A1DFFC00A1434A /* GamePadHandler.swift */,
 				835E06A227A587FE00521849 /* GamePadReceivingViewModifier.swift */,
 				83EE1AE827A1DFE200A1434A /* GamePadInputReceiver.swift */,
 			);
-			path = GamePad;
+			path = "Game Pad";
 			sourceTree = "<group>";
 		};
 		83EE042627A09FBA00532F6D /* Frameworks */ = {
@@ -232,20 +225,21 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		83EE1AE727A1DFBE00A1434A /* Game Controller */ = {
+		83EE1AE727A1DFBE00A1434A /* Game Logic */ = {
 			isa = PBXGroup;
 			children = (
-				833F3805279DCB3C0065B692 /* GameController.swift */,
-				83EE1AEC27A1E0B900A1434A /* GameActionHandler.swift */,
 				83EE1AEE27A1E4A700A1434A /* GameTickGenerator.swift */,
 				835E069F27A458BA00521849 /* GameSettings.swift */,
+				835E06A427A5D10000521849 /* MovePerformer.swift */,
+				835E06A627A5D11900521849 /* ScoreManager.swift */,
 			);
-			path = "Game Controller";
+			path = "Game Logic";
 			sourceTree = "<group>";
 		};
 		83EE1AF327A1F17400A1434A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				833F37D3279DA88F0065B692 /* Assets.xcassets */,
 				83EE1AF427A1F18100A1434A /* Heartbeats.ahap */,
 				83EE1AF627A1F50300A1434A /* Test.ahap */,
 			);
@@ -393,7 +387,6 @@
 				835E06A727A5D11900521849 /* ScoreManager.swift in Sources */,
 				833F3802279DBFA60065B692 /* DirectionButtonsView.swift in Sources */,
 				833F37D0279DA88D0065B692 /* SnakeSwiftUIApp.swift in Sources */,
-				83EE1AED27A1E0B900A1434A /* GameActionHandler.swift in Sources */,
 				835E06A327A587FE00521849 /* GamePadReceivingViewModifier.swift in Sources */,
 				83EE1AF127A1EDB200A1434A /* View+Extensions.swift in Sources */,
 				833F3808279DFB440065B692 /* GameBoard.swift in Sources */,
@@ -404,7 +397,6 @@
 				833F37FD279DAB0B0065B692 /* GameBoardView.swift in Sources */,
 				83EE042527A094F400532F6D /* GameOverView.swift in Sources */,
 				83EE1AEF27A1E4A700A1434A /* GameTickGenerator.swift in Sources */,
-				833F3806279DCB3C0065B692 /* GameController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
