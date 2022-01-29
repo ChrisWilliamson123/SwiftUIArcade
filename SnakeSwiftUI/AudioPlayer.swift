@@ -6,7 +6,6 @@ class AudioPlayer {
     private let players: [String: AVAudioPlayer]
     
     init() {
-        print("Spinning up new audio player")
         var players: [String: AVAudioPlayer] = [:]
         Sound.allCases.forEach({
             let path = Bundle.main.path(forResource: $0.rawValue, ofType: "wav")!
@@ -17,7 +16,7 @@ class AudioPlayer {
         self.players = players
     }
 
-    func play(sound: Sound) {
+    func play(_ sound: Sound) {
         guard let player = players[sound.rawValue] else { return }
         DispatchQueue.global(qos: .background).async {
             player.play()
@@ -29,5 +28,7 @@ class AudioPlayer {
         case menuSelect = "menu_select"
         case pauseIn = "pause_in"
         case pauseOut = "pause_out"
+        case scoreUp = "score_up"
+        case gameOver = "game_over"
     }
 }

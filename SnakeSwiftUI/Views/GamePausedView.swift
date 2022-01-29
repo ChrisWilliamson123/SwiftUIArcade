@@ -56,10 +56,10 @@ extension GamePausedView: GamePadInputReceiver {
     func directionalPadPressed(direction: Direction) {
         switch direction {
         case .up:
-            AudioPlayer.default.play(sound: .menuNavigate)
+            AudioPlayer.default.play(.menuNavigate)
             selectedSettingIndex = max(selectedSettingIndex - 1, 0)
         case .down:
-            AudioPlayer.default.play(sound: .menuNavigate)
+            AudioPlayer.default.play(.menuNavigate)
             selectedSettingIndex = min(selectedSettingIndex + 1, settings.settingsList.count - 1)
         default: break
         }
@@ -67,14 +67,14 @@ extension GamePausedView: GamePadInputReceiver {
     
     func buttonAPressed() {
         settings.settingsList[selectedSettingIndex].action()
-        AudioPlayer.default.play(sound: .menuSelect)
+        AudioPlayer.default.play(.menuSelect)
     }
 }
 
 extension GamePausedView {
     func resume() {
         isPaused = false
-        AudioPlayer.default.play(sound: .pauseOut)
+        AudioPlayer.default.play(.pauseOut)
     }
 }
 

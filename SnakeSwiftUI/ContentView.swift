@@ -44,7 +44,11 @@ struct ContentView: View {
         }
         .background(Image("background").centerCropped().ignoresSafeArea())
         .onAppear(perform: { tickGenerator.tickHandler = performTimedMove })
-        .onChange(of: gameOver, perform: { if $0 { tickGenerator.pause()} })
+        .onChange(of: gameOver, perform: {
+            guard $0 else { return }
+            tickGenerator.pause()
+            AudioPlayer.default.play(.gameOver)
+        })
         .onChange(of: paused, perform: { $0 ? tickGenerator.pause() : tickGenerator.restart() })
         .environmentObject(settings)
     }
