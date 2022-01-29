@@ -26,9 +26,6 @@ struct GamePausedView: View {
     @EnvironmentObject var settings: GameSettings
     @Binding var isPaused: Bool
     @State var selectedSettingIndex: Int = 0
-    
-    private let menuNavigationAudioPlayer = AudioPlayer(sound: .menuNavigate)
-    private let menuSelectionAudioPlayer = AudioPlayer(sound: .menuSelect)
 
     var body: some View {
         VStack(spacing: 16) {
@@ -49,20 +46,20 @@ struct GamePausedView: View {
 
 extension GamePausedView: GamePadInputReceiver {
     func menuButtonPressed() {
-        isPaused = false
+        resume()
     }
     
     func buttonBPressed() {
-        isPaused = false
+        resume()
     }
     
     func directionalPadPressed(direction: Direction) {
         switch direction {
         case .up:
-            menuNavigationAudioPlayer.playSound()
+            AudioPlayer.default.play(sound: .menuNavigate)
             selectedSettingIndex = max(selectedSettingIndex - 1, 0)
         case .down:
-            menuNavigationAudioPlayer.playSound()
+            AudioPlayer.default.play(sound: .menuNavigate)
             selectedSettingIndex = min(selectedSettingIndex + 1, settings.settingsList.count - 1)
         default: break
         }
@@ -70,7 +67,14 @@ extension GamePausedView: GamePadInputReceiver {
     
     func buttonAPressed() {
         settings.settingsList[selectedSettingIndex].action()
-        menuSelectionAudioPlayer.playSound()
+        AudioPlayer.default.play(sound: .menuSelect)
+    }
+}
+
+extension GamePausedView {
+    func resume() {
+        isPaused = false
+        AudioPlayer.default.play(sound: .pauseOut)
     }
 }
 

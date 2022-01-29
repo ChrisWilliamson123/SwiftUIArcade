@@ -11,7 +11,8 @@ import SwiftUI
 struct SnakeSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().background(Color(UIColor.systemBackground))
+            ContentView()
+                .background(Color(UIColor.systemBackground))
         }
     }
 }

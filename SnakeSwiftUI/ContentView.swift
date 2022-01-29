@@ -22,6 +22,7 @@ struct ContentView: View {
     @State private var paused: Bool = false
     @StateObject private var gamePadHandler = GamePadHandler.default
     
+    
     init() {
         tickGenerator = GameTickGenerator()
     }

@@ -1,21 +1,33 @@
 import AVFoundation
 
 class AudioPlayer {
-    private let audioPlayer: AVAudioPlayer
+    static let `default`: AudioPlayer = AudioPlayer()
+    
+    private let players: [String: AVAudioPlayer]
+    
+    init() {
+        print("Spinning up new audio player")
+        var players: [String: AVAudioPlayer] = [:]
+        Sound.allCases.forEach({
+            let path = Bundle.main.path(forResource: $0.rawValue, ofType: "wav")!
+            let player = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            player.prepareToPlay()
+            players[$0.rawValue] = player
+        })
+        self.players = players
+    }
 
-    init(sound: Sound, fileType: String = "wav") {
-        let path = Bundle.main.path(forResource: sound.rawValue, ofType: fileType)!
-        audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-        audioPlayer.prepareToPlay()
+    func play(sound: Sound) {
+        guard let player = players[sound.rawValue] else { return }
+        DispatchQueue.global(qos: .background).async {
+            player.play()
+        }
     }
-    
-    func playSound() {
-        if audioPlayer.isPlaying { audioPlayer.stop() }
-        audioPlayer.play()
-    }
-    
-    enum Sound: String {
+
+    enum Sound: String, CaseIterable {
         case menuNavigate = "menu_navigate"
         case menuSelect = "menu_select"
+        case pauseIn = "pause_in"
+        case pauseOut = "pause_out"
     }
 }

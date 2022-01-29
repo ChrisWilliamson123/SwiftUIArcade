@@ -31,6 +31,7 @@ struct MainGameView: View {
 extension MainGameView: GamePadInputReceiver {
     func menuButtonPressed() {
         paused = true
+        AudioPlayer.default.play(sound: .pauseIn)
     }
     
     func directionalPadPressed(direction: Direction) {
