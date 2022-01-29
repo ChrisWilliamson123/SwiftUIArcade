@@ -31,14 +31,6 @@ extension GamePausedView: GamePadInputReceiver {
     func menuButtonPressed() {
         isPaused = false
     }
-    
-    func directionalPadPressed(direction: Direction) {
-        
-    }
-    
-    func buttonBPressed() {
-        
-    }
 }
 
 struct GamePausedView_Previews: PreviewProvider {
@@ -46,3 +38,4 @@ struct GamePausedView_Previews: PreviewProvider {
         GamePausedView(settings: GameSettings(), isPaused: .constant(false))
     }
 }
+

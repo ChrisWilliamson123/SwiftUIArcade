@@ -23,6 +23,7 @@ struct ContentView: View {
             }
             else if gameController.gameIsOver {
                 GameOverView(newGameAction: gameController.reset, finalScore: gameController.score)
+                    .gamePadReceiving()
             }
         }.background(Image("background").centerCropped().ignoresSafeArea())
     }

@@ -33,12 +33,6 @@ extension MainGameView: GamePadInputReceiver {
     func directionalPadPressed(direction: Direction) {
         gameController.handleDirectionChange(direction)
     }
-    
-    func buttonBPressed() {
-        
-    }
-    
-    
 }
 
 struct MainGameView_Previews: PreviewProvider {

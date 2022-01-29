@@ -22,12 +22,6 @@ struct GameOverView: View {
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ultraThinMaterial)
-        .onAppear {
-            GamePadHandler.default.receivers.append((identifier, self))
-        }
-        .onDisappear {
-            GamePadHandler.default.receivers.removeAll(where: { $0.id == identifier })
-        }
     }
 }
 
@@ -35,16 +29,6 @@ extension GameOverView: GamePadInputReceiver {
     func menuButtonPressed() {
         newGameAction()
     }
-    
-    func directionalPadPressed(direction: Direction) {
-        
-    }
-    
-    func buttonBPressed() {
-        
-    }
-    
-    
 }
 
 struct GameOverView_Previews: PreviewProvider {
