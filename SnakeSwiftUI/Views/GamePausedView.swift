@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GamePausedView: View {
-    @ObservedObject var settings: GameSettings
+    @EnvironmentObject var settings: GameSettings
     @Binding var isPaused: Bool
     @State var selectedSettingIndex: Int = 0
 
@@ -53,7 +53,7 @@ extension GamePausedView: GamePadInputReceiver {
 
 struct GamePausedView_Previews: PreviewProvider {
     static var previews: some View {
-        GamePausedView(settings: GameSettings(), isPaused: .constant(false))
+        GamePausedView(isPaused: .constant(false))
     }
 }
 

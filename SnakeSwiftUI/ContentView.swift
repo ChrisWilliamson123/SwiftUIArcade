@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let boardSize: Int = 20
-    
     // TIMING
     private let tickGenerator: GameTickGenerator
     private var gameSpeed: Double = 0.2
@@ -19,6 +17,7 @@ struct ContentView: View {
     // GAME
     @State private var board = GameBoard.getStartingBoard()
     @StateObject private var scoreManager = ScoreManager()
+    @StateObject private var settings: GameSettings = GameSettings()
     @State private var gameOver: Bool = false
     @State private var paused: Bool = false
     
@@ -28,29 +27,27 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainGameView(board: $board, gameOver: $gameOver, paused: $paused, scoreManager: scoreManager, shouldGlow: .constant(true))
+            MainGameView(board: $board, gameOver: $gameOver, paused: $paused, scoreManager: scoreManager)
                 .padding()
 
             if paused {
-                GamePausedView(settings: GameSettings(), isPaused: $paused)
+                GamePausedView(isPaused: $paused)
             }
             else if gameOver {
                 GameOverView(newGameAction: resetGame, finalScore: scoreManager.score)
             }
         }
         .background(Image("background").centerCropped().ignoresSafeArea())
-        .onAppear(perform: {
-            print("On appear called")
-            tickGenerator.tickHandler = performTimedMove
-        })
+        .onAppear(perform: { tickGenerator.tickHandler = performTimedMove })
         .onChange(of: gameOver, perform: { if $0 { tickGenerator.pause()} })
         .onChange(of: paused, perform: { $0 ? tickGenerator.pause() : tickGenerator.restart() })
+        .environmentObject(settings)
     }
     
     private func resetGame() {
         latestMoveTime = Date().timeIntervalSince1970
         scoreManager.score = 0
-        board = GameBoard.getStartingBoard(canWrap: false)
+        board = GameBoard.getStartingBoard()
         gameOver = false
         tickGenerator.restart()
     }
@@ -58,14 +55,12 @@ struct ContentView: View {
 
 extension ContentView {
     func performTimedMove() {
-        print("timed move", Date())
         let currentTimeInterval = Date().timeIntervalSince1970
         if currentTimeInterval - latestMoveTime > gameSpeed {
             latestMoveTime = currentTimeInterval
             do {
-                board = try MovePerformer(scoreManager: scoreManager).move(board)
+                board = try MovePerformer(scoreManager: scoreManager).move(board, canWrap: settings.canWrap)
             } catch {
-                print("Automatic move caused error: \(error)")
                 gameOver = true
             }
         }

@@ -2,7 +2,6 @@ struct GameBoard {
     let size: Int = 20
     let snake: Snake
     let foodLocation: Coordinate
-    let canWrap: Bool
     
     var foodEaten: Bool { snake.head == foodLocation }
     var newFoodLocation: Coordinate {
@@ -17,18 +16,18 @@ struct GameBoard {
         return possibleCoordinates.randomElement()!
     }
     
-    static func getStartingBoard(canWrap: Bool = false) -> GameBoard {
-        GameBoard(snake: Snake(direction: .right, cells: [.init(1, 1)]), foodLocation: .init(5, 3), canWrap: canWrap)
+    static func getStartingBoard() -> GameBoard {
+        GameBoard(snake: Snake(direction: .right, cells: [.init(1, 1)]), foodLocation: .init(5, 3))
     }
     
-    func movingSnake(_ direction: Direction) throws -> GameBoard {
+    func movingSnake(_ direction: Direction, canWrap: Bool) throws -> GameBoard {
         let newSnake = try snake.movedInDirection(direction)
         let newHead = newSnake.cells.last!
         if canWrap {
-            return GameBoard(snake: newSnake.wrapped(gameSize: size), foodLocation: foodLocation, canWrap: canWrap)
+            return GameBoard(snake: newSnake.wrapped(gameSize: size), foodLocation: foodLocation)
         }
         guard newHead.x >= 0 && newHead.x < size && newHead.y >= 0 && newHead.y < size else { throw SnakeMovementError.outOfBounds }
-        return GameBoard(snake: newSnake, foodLocation: foodLocation, canWrap: canWrap)
+        return GameBoard(snake: newSnake, foodLocation: foodLocation)
     }
 }
 

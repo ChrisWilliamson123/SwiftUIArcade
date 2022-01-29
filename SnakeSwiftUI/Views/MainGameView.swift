@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainGameView: View {
-//    let boardSize: Int
+    @EnvironmentObject var settings: GameSettings
+
     @Binding var board: GameBoard
     @Binding var gameOver: Bool
     @Binding var paused: Bool
     @ObservedObject var scoreManager: ScoreManager
-    @Binding var shouldGlow: Bool
     
     var canMove: Bool { !gameOver }
 //    @StateObject var movementHandler: SnakeMovementHandler
@@ -21,7 +21,7 @@ struct MainGameView: View {
     var body: some View {
         VStack(spacing: 32) {
             Text("Score: \(scoreManager.score)").font(.largeTitle).foregroundColor(.primary)
-            GameBoardView(board: board, shouldGlow: shouldGlow)
+            GameBoardView(board: board, shouldGlow: settings.glowEnabled)
             Spacer()
         }
         .gamePadReceiving(receiver: self)
@@ -43,7 +43,7 @@ extension MainGameView {
         // Only change direction if it's not in same direction or reverse direction
         guard canMove && direction != board.snake.direction && direction != board.snake.reverseDirection else { return }
         do {
-            board = try MovePerformer(scoreManager: scoreManager).move(board, direction)
+            board = try MovePerformer(scoreManager: scoreManager).move(board, direction, canWrap: settings.canWrap)
         } catch {
             print("User initiated move caused error: \(error)")
             gameOver = true
