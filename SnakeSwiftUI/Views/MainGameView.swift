@@ -11,6 +11,7 @@ struct MainGameView: View {
 //    let boardSize: Int
     @Binding var board: GameBoard
     @Binding var gameOver: Bool
+    @ObservedObject var scoreManager: ScoreManager
     @Binding var shouldGlow: Bool
     
     var canMove: Bool { !gameOver }
@@ -18,7 +19,7 @@ struct MainGameView: View {
 
     var body: some View {
         VStack(spacing: 32) {
-//            Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
+            Text("Score: \(scoreManager.score)").font(.largeTitle).foregroundColor(.primary)
             GameBoardView(board: board, shouldGlow: shouldGlow)
             Spacer()
         }
@@ -42,7 +43,7 @@ extension MainGameView {
         // Only change direction if it's not in same direction or reverse direction
         guard canMove && direction != board.snake.direction && direction != board.snake.reverseDirection else { return }
         do {
-            board = try MovePerformer().move(board, direction)
+            board = try MovePerformer(scoreManager: scoreManager).move(board, direction)
         } catch {
             print("User initiated move caused error: \(error)")
             gameOver = true

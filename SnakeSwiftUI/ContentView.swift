@@ -15,8 +15,9 @@ struct ContentView: View {
     private var gameSpeed: Double = 0.2
     @State private var latestMoveTime: Double = Date().timeIntervalSince1970
     
-    @State private var gameOver: Bool = false { didSet { if gameOver { tickGenerator.pause() } } }
     @State private var board = GameBoard.getStartingBoard()
+    @StateObject private var scoreManager = ScoreManager()
+    @State private var gameOver: Bool = false { didSet { if gameOver { tickGenerator.pause() } } }
     
     init() {
         tickGenerator = GameTickGenerator()
@@ -24,14 +25,14 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainGameView(board: $board, gameOver: $gameOver, shouldGlow: .constant(true))
+            MainGameView(board: $board, gameOver: $gameOver, scoreManager: scoreManager, shouldGlow: .constant(true))
                 .padding()
 
 //            if gameController.isPaused {
 //                GamePausedView(settings: gameController.settings, isPaused: $gameController.isPaused)
 //            }
             if gameOver {
-                GameOverView(newGameAction: resetGame, finalScore: 0)
+                GameOverView(newGameAction: resetGame, finalScore: scoreManager.score)
             }
         }
         .background(Image("background").centerCropped().ignoresSafeArea())
@@ -40,8 +41,7 @@ struct ContentView: View {
     
     private func resetGame() {
         latestMoveTime = Date().timeIntervalSince1970
-//        score = 0
-        
+        scoreManager.score = 0
         board = GameBoard.getStartingBoard(canWrap: false)
         gameOver = false
         tickGenerator.restart()
@@ -54,7 +54,7 @@ extension ContentView {
         if currentTimeInterval - latestMoveTime > gameSpeed {
             latestMoveTime = currentTimeInterval
             do {
-                board = try MovePerformer().move(board)
+                board = try MovePerformer(scoreManager: scoreManager).move(board)
             } catch {
                 print("Automatic move caused error: \(error)")
                 gameOver = true
@@ -64,6 +64,8 @@ extension ContentView {
 }
 
 struct MovePerformer {
+    let scoreManager: ScoreManager
+
     func move(_ board: GameBoard, _ direction: Direction? = nil) throws -> GameBoard {
         do {
             let newBoard = try board.movingSnake(direction ?? board.snake.direction)
@@ -74,9 +76,14 @@ struct MovePerformer {
     }
     
     private func handleFoodCollision(collidingBoard: GameBoard) -> GameBoard {
+        scoreManager.score += 1
         let newFoodLocation = collidingBoard.newFoodLocation
         return GameBoard(snake: Snake(direction: collidingBoard.snake.direction, cells: collidingBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation, canWrap: collidingBoard.canWrap)
     }
+}
+
+final class ScoreManager: ObservableObject {
+    @Published var score = 0
 }
 
 struct ContentView_Previews: PreviewProvider {
