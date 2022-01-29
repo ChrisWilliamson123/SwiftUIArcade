@@ -20,6 +20,7 @@ struct ContentView: View {
     @StateObject private var settings: GameSettings = GameSettings()
     @State private var gameOver: Bool = false
     @State private var paused: Bool = false
+    @StateObject private var gamePadHandler = GamePadHandler.default
     
     init() {
         tickGenerator = GameTickGenerator()
@@ -29,8 +30,11 @@ struct ContentView: View {
         ZStack {
             MainGameView(board: $board, gameOver: $gameOver, paused: $paused, scoreManager: scoreManager)
                 .padding()
-
-            if paused {
+            
+            if !gamePadHandler.isConnected {
+                ControllerDisconnectedView(paused: $paused)
+            }
+            else if paused {
                 GamePausedView(isPaused: $paused)
             }
             else if gameOver {

@@ -1,20 +1,24 @@
 import GameController
 import CoreHaptics
+import Combine
 
-class GamePadHandler {
+class GamePadHandler: ObservableObject {
     static var `default`: GamePadHandler = GamePadHandler()
 
     var receivers: [(id: String, receiver: GamePadInputReceiver)] = []
     var receiver: GamePadInputReceiver? { receivers.last?.receiver }
+    @Published var isConnected = false
 
     private var hapticsEngine: CHHapticEngine?
     
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(controllerDidConnect), name: .GCControllerDidConnect, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(controllerDidDisconnect), name: .GCControllerDidDisconnect, object: nil)
     }
     
     @objc private func controllerDidConnect(notification: NSNotification) {
         guard let gameController = notification.object as? GCController, let gamePad = gameController.extendedGamepad else { return }
+        isConnected = true
         
         gamePad.dpad.valueChangedHandler = handleGamePadDirectionalPadInput
         gamePad.buttonMenu.valueChangedHandler = handleMenuButtonPress
@@ -25,6 +29,10 @@ class GamePadHandler {
             hapticsEngine = haptics.createEngine(withLocality: .default)
             try? hapticsEngine!.start()
         }
+    }
+    
+    @objc private func controllerDidDisconnect(notification: NSNotification) {
+        isConnected = false
     }
 
     private func handleMenuButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
