@@ -26,8 +26,8 @@ class GameController: ObservableObject {
     init() {
         let settings = GameSettings()
         self.settings = settings
-        board = GameBoard.getStartingBoard(using: settings)
-        tickGenerator = GameTickGenerator(tickHandler: handleTick)
+        board = GameBoard.getStartingBoard(canWrap: false)
+        tickGenerator = GameTickGenerator()
         settings.delegate = self
     }
     
@@ -82,7 +82,7 @@ extension GameController: GameActionHandler {
         gameSpeed = Self.startingGameSpeed
         score = 0
         
-        board = GameBoard.getStartingBoard(using: settings)
+        board = GameBoard.getStartingBoard(canWrap: false)
         gameIsOver = false
         tickGenerator.restart()
     }

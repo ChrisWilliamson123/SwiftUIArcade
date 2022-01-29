@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GameBoardView: View {
     let board: GameBoard
-    let gridSize: Int
+//    let gridSize: Int
     let twoPixelPadding = EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
     let shouldGlow: Bool
     
@@ -18,9 +18,9 @@ struct GameBoardView: View {
             // Wrapping in a ZStack to ensure centering of inner views.
             ZStack {
                 VStack(spacing: 0) {
-                    ForEach(0..<gridSize) { rowIndex in
+                    ForEach(0..<board.size) { rowIndex in
                         HStack(spacing: 0) {
-                            ForEach(0..<gridSize) { colIndex in
+                            ForEach(0..<board.size) { colIndex in
                                 getCellFill(cellCoord: .init(colIndex, rowIndex))
                             }
                         }
@@ -44,12 +44,12 @@ struct GameBoardView: View {
     }
 }
 
-struct GameBoardView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Spacer()
-            GameBoardView(board: GameBoard.getStartingBoard(using: GameSettings()), gridSize: 20, shouldGlow: true)
-            Spacer()
-        }
-    }
-}
+//struct GameBoardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack {
+//            Spacer()
+//            GameBoardView(board: GameBoard.getStartingBoard(using: GameSettings()), gridSize: 20, shouldGlow: true)
+//            Spacer()
+//        }
+//    }
+//}

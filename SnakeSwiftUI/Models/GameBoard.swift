@@ -17,9 +17,8 @@ struct GameBoard {
         return possibleCoordinates.randomElement()!
     }
     
-    static func getStartingBoard(using settings: GameSettings) -> GameBoard {
-        print("Building board, canWrap: \(settings.canWrap)")
-        return GameBoard(snake: Snake(direction: .right, cells: [.init(1, 1)]), foodLocation: .init(5, 3), canWrap: settings.canWrap)
+    static func getStartingBoard(canWrap: Bool = false) -> GameBoard {
+        GameBoard(snake: Snake(direction: .right, cells: [.init(1, 1)]), foodLocation: .init(5, 3), canWrap: canWrap)
     }
     
     func movingSnake(_ direction: Direction) throws -> GameBoard {
