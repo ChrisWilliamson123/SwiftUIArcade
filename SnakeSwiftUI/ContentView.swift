@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MainGameView(score: gameController.score, board: gameController.board, boardSize: boardSize, isPaused: $gameController.isPaused, gameController: gameController)
+            MainGameView(boardSize: boardSize, gameController: gameController)
                 .gamePadReceiving()
                 .padding()
             

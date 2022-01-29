@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct MainGameView: View {
-    private let identifier = "main"
-    let score: Int
-    let board: GameBoard
+//    let score: Int
+//    let board: GameBoard
     let boardSize: Int
-    @Binding var isPaused: Bool
+//    @Binding var isPaused: Bool
     @ObservedObject var gameController: GameController
 
     var body: some View {
         VStack(spacing: 32) {
-            Text("Score: \(score)").font(.largeTitle).foregroundColor(.primary)
-            GameBoardView(board: board, gridSize: boardSize)
+            Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
+            GameBoardView(board: gameController.board, gridSize: boardSize)
             Spacer()
         }
     }
@@ -27,7 +26,7 @@ struct MainGameView: View {
 extension MainGameView: GamePadInputReceiver {
     func menuButtonPressed() {
         print("Menu button pressed in main game view")
-        isPaused = true
+        gameController.isPaused = true
     }
     
     func directionalPadPressed(direction: Direction) {
@@ -37,6 +36,6 @@ extension MainGameView: GamePadInputReceiver {
 
 struct MainGameView_Previews: PreviewProvider {
     static var previews: some View {
-        MainGameView(score: 10, board: GameBoard.getStartingBoard(using: GameSettings(canWrap: false)), boardSize: 20, isPaused: .constant(false), gameController: GameController())
+        MainGameView(boardSize: 20, gameController: GameController())
     }
 }
