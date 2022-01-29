@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class GameController: ObservableObject {
-    private static let startingGameSpeed: Double = 0.25
+    private static let startingGameSpeed: Double = 0.15
     
     private var latestMoveTime: Double = Date().timeIntervalSince1970
     private var gameSpeed: Double = startingGameSpeed
@@ -47,7 +47,6 @@ class GameController: ObservableObject {
             var newBoard = try board.movingSnake(direction ?? board.snake.direction)
             if newBoard.foodEaten {
                 score += 1
-                gameSpeed *= 0.9
                 let newFoodLocation = newBoard.newFoodLocation
                 newBoard = GameBoard(snake: Snake(direction: newBoard.snake.direction, cells: newBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation, canWrap: settings.canWrap)
             }
