@@ -22,6 +22,7 @@ struct GameOverView: View {
         .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ultraThinMaterial)
+        .gamePadReceiving(receiver: self)
     }
 }
 

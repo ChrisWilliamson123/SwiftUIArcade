@@ -17,7 +17,7 @@ struct GamePausedView: View {
             Text("PAUSED").font(.largeTitle).foregroundColor(.primary)
             VStack {
                 ForEach(Array(settings.settingsList.enumerated()), id: \.element) { index, element in
-                    Button("\(index == selectedSettingIndex ? ">" : " ") \(element.name): \(element.status)", action: element.action)
+                    Text("\(index == selectedSettingIndex ? ">" : " ") \(element.name): \(element.status)")
                 }
             }
             Text("Press START to resume").foregroundColor(.action)
@@ -25,13 +25,25 @@ struct GamePausedView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ultraThinMaterial)
-        
+        .gamePadReceiving(receiver: self)
     }
 }
 
 extension GamePausedView: GamePadInputReceiver {
     func menuButtonPressed() {
         isPaused = false
+    }
+    
+    func directionalPadPressed(direction: Direction) {
+        switch direction {
+        case .up: selectedSettingIndex = max(selectedSettingIndex - 1, 0)
+        case .down: selectedSettingIndex = min(selectedSettingIndex + 1, settings.settingsList.count - 1)
+        default: break
+        }
+    }
+    
+    func buttonAPressed() {
+        settings.settingsList[selectedSettingIndex].action()
     }
 }
 

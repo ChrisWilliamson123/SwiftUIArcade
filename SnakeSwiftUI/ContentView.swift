@@ -14,16 +14,13 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             MainGameView(boardSize: boardSize, gameController: gameController)
-                .gamePadReceiving()
                 .padding()
             
             if gameController.isPaused {
                 GamePausedView(settings: gameController.settings, isPaused: $gameController.isPaused)
-                    .gamePadReceiving()
             }
             else if gameController.gameIsOver {
                 GameOverView(newGameAction: gameController.reset, finalScore: gameController.score)
-                    .gamePadReceiving()
             }
         }.background(Image("background").centerCropped().ignoresSafeArea())
     }

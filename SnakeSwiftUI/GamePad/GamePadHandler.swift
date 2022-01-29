@@ -39,6 +39,7 @@ class GamePadHandler {
     private func handleAButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
 //        playHapticsFile()
+        receiver?.buttonAPressed()
     }
     
     private func handleBButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {

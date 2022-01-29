@@ -20,6 +20,7 @@ struct MainGameView: View {
             GameBoardView(board: gameController.board, gridSize: boardSize, shouldGlow: gameController.settings.glowEnabled)
             Spacer()
         }
+        .gamePadReceiving(receiver: self)
     }
 }
 
