@@ -17,7 +17,7 @@ struct MainGameView: View {
     var body: some View {
         VStack(spacing: 32) {
             Text("Score: \(gameController.score)").font(.largeTitle).foregroundColor(.primary)
-            GameBoardView(board: gameController.board, gridSize: boardSize)
+            GameBoardView(board: gameController.board, gridSize: boardSize, shouldGlow: gameController.settings.glowEnabled)
             Spacer()
         }
     }

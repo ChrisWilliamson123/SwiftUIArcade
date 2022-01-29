@@ -14,9 +14,8 @@ class GameController: ObservableObject {
     private var latestMoveTime: Double = Date().timeIntervalSince1970
     private var gameSpeed: Double = startingGameSpeed
     private var tickGenerator: GameTickGenerator!
-
-    var settings: GameSettings
     
+    @Published var settings: GameSettings
     @Published var board: GameBoard
     @Published var score: Int = 0
     @Published var gameIsOver: Bool = false
@@ -25,7 +24,8 @@ class GameController: ObservableObject {
     private var canMove: Bool { !isPaused && !gameIsOver }
     
     init() {
-        settings = GameSettings(canWrap: false)
+        let settings = GameSettings()
+        self.settings = settings
         board = GameBoard.getStartingBoard(using: settings)
         tickGenerator = GameTickGenerator(tickHandler: handleTick)
         settings.delegate = self

@@ -11,6 +11,7 @@ struct GameBoardView: View {
     let board: GameBoard
     let gridSize: Int
     let twoPixelPadding = EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+    let shouldGlow: Bool
     
     var body: some View {
         GeometryReader { geo in
@@ -26,9 +27,9 @@ struct GameBoardView: View {
                     }
                 }
                 .background(.ultraThinMaterial)
-                .border(.purple)
+                .border(Color.primary)
                 .clipped()
-                .glow()
+                .if(shouldGlow) { $0.glow() }
                 .frame(width: min(geo.size.height, geo.size.width), height: min(geo.size.height, geo.size.width))
             }
             .frame(minWidth: geo.size.width)
@@ -47,8 +48,17 @@ struct GameBoardView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            GameBoardView(board: GameBoard.getStartingBoard(using: GameSettings(canWrap: false)), gridSize: 20)
+            GameBoardView(board: GameBoard.getStartingBoard(using: GameSettings()), gridSize: 20, shouldGlow: true)
             Spacer()
+        }
+    }
+}
+extension View {
+    func `if`<Content: View>(_ conditional: Bool, content: (Self) -> Content) -> some View {
+        if conditional {
+            return AnyView(content(self))
+        } else {
+            return AnyView(self)
         }
     }
 }

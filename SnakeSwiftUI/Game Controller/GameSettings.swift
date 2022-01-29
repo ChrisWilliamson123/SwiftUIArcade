@@ -5,17 +5,15 @@ protocol GameSettingsDelegate: AnyObject {
 }
 
 class GameSettings: ObservableObject {
-    @Published var canWrap: Bool { didSet { delegate.settingDidChange() } }
+    @Published var canWrap: Bool = false { didSet { delegate?.settingDidChange() } }
+    @Published var glowEnabled: Bool = true { didSet { delegate?.settingDidChange() } }
     weak var delegate: GameSettingsDelegate!
     
     var settingsList: [SettingsListEntry] {
         [
-            .init(name: "Wrapping", status: canWrap ? "ON" : "OFF", action: { self.canWrap.toggle() } )
+            .init(name: "Wrapping", status: canWrap ? "ON" : "OFF", action: { self.canWrap.toggle() } ),
+            .init(name: "Glow", status: glowEnabled ? "ON" : "OFF", action: { self.glowEnabled.toggle() } )
         ]
-    }
-    
-    init(canWrap: Bool = false) {
-        self.canWrap = canWrap
     }
     
     struct SettingsListEntry: Hashable {
