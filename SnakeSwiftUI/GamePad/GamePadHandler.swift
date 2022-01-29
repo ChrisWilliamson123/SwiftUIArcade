@@ -10,6 +10,7 @@ class GamePadHandler {
         for r in receivers { print(r) }
         return receivers.last?.receiver
     }
+
     private var hapticsEngine: CHHapticEngine?
     
     init() {
@@ -32,19 +33,17 @@ class GamePadHandler {
 
     private func handleMenuButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
-        
         receiver?.menuButtonPressed()
     }
     
     private func handleAButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
-//        playHapticsFile()
         receiver?.buttonAPressed()
     }
     
     private func handleBButtonPress(button: GCControllerButtonInput, value: Float, pressed: Bool) -> Void {
         guard pressed else { return }
-//        delegate.buttonBPressed()
+        receiver?.buttonBPressed()
     }
     
     private func handleGamePadDirectionalPadInput(dpad: GCControllerDirectionPad, x: Float, y: Float) -> Void {
@@ -55,7 +54,6 @@ class GamePadHandler {
             .init(-1, 0): .left
         ]
         guard let direction = directionMap[Coordinate(Int(x), Int(y))] else { return }
-//        delegate.directionalPadPressed(direction: direction)
         receiver?.directionalPadPressed(direction: direction)
     }
     

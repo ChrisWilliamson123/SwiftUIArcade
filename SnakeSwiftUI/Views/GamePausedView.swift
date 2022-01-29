@@ -34,6 +34,10 @@ extension GamePausedView: GamePadInputReceiver {
         isPaused = false
     }
     
+    func buttonBPressed() {
+        isPaused = false
+    }
+    
     func directionalPadPressed(direction: Direction) {
         switch direction {
         case .up: selectedSettingIndex = max(selectedSettingIndex - 1, 0)
