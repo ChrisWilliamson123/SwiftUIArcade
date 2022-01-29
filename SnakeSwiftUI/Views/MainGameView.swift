@@ -10,7 +10,10 @@ import SwiftUI
 struct MainGameView: View {
 //    let boardSize: Int
     @Binding var board: GameBoard
+    @Binding var gameOver: Bool
     @Binding var shouldGlow: Bool
+    
+    var canMove: Bool { !gameOver }
 //    @StateObject var movementHandler: SnakeMovementHandler
 
     var body: some View {
@@ -37,31 +40,13 @@ extension MainGameView: GamePadInputReceiver {
 extension MainGameView {
     func handleDirectionChange(_ direction: Direction) {
         // Only change direction if it's not in same direction or reverse direction
-        guard direction != board.snake.direction && direction != board.snake.reverseDirection else { return }
-        let movePerformer = MovePerformer(board: board)
+        guard canMove && direction != board.snake.direction && direction != board.snake.reverseDirection else { return }
         do {
-            board = try movePerformer.move(direction)
+            board = try MovePerformer().move(board, direction)
         } catch {
             print("User initiated move caused error: \(error)")
+            gameOver = true
         }
-    }
-}
-
-struct MovePerformer {
-    let board: GameBoard
-    
-    func move(_ direction: Direction? = nil) throws -> GameBoard {
-        do {
-            let newBoard = try board.movingSnake(direction ?? board.snake.direction)
-            return newBoard.foodEaten ? handleFoodCollision(collidingBoard: newBoard) : newBoard
-        } catch {
-            throw error
-        }
-    }
-    
-    private func handleFoodCollision(collidingBoard: GameBoard) -> GameBoard {
-        let newFoodLocation = collidingBoard.newFoodLocation
-        return GameBoard(snake: Snake(direction: collidingBoard.snake.direction, cells: collidingBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation, canWrap: board.canWrap)
     }
 }
 

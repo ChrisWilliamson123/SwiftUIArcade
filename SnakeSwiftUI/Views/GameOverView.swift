@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct GameOverView: View {
-    let identifier = "GameOverView"
     let newGameAction: () -> Void
     let finalScore: Int
 

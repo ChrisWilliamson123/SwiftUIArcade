@@ -15,7 +15,7 @@ struct ContentView: View {
     private var gameSpeed: Double = 0.2
     @State private var latestMoveTime: Double = Date().timeIntervalSince1970
     
-    @State private var gameOver: Bool = false
+    @State private var gameOver: Bool = false { didSet { if gameOver { tickGenerator.pause() } } }
     @State private var board = GameBoard.getStartingBoard()
     
     init() {
@@ -24,18 +24,27 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            MainGameView(board: $board, shouldGlow: .constant(true))
+            MainGameView(board: $board, gameOver: $gameOver, shouldGlow: .constant(true))
                 .padding()
 
 //            if gameController.isPaused {
 //                GamePausedView(settings: gameController.settings, isPaused: $gameController.isPaused)
 //            }
-//            else if gameController.gameIsOver {
-//                GameOverView(newGameAction: gameController.reset, finalScore: gameController.score)
-//            }
+            if gameOver {
+                GameOverView(newGameAction: resetGame, finalScore: 0)
+            }
         }
         .background(Image("background").centerCropped().ignoresSafeArea())
         .onAppear(perform: { tickGenerator.tickHandler = performTimedMove })
+    }
+    
+    private func resetGame() {
+        latestMoveTime = Date().timeIntervalSince1970
+//        score = 0
+        
+        board = GameBoard.getStartingBoard(canWrap: false)
+        gameOver = false
+        tickGenerator.restart()
     }
 }
 
@@ -45,11 +54,28 @@ extension ContentView {
         if currentTimeInterval - latestMoveTime > gameSpeed {
             latestMoveTime = currentTimeInterval
             do {
-                board = try MovePerformer(board: board).move()
+                board = try MovePerformer().move(board)
             } catch {
                 print("Automatic move caused error: \(error)")
+                gameOver = true
             }
         }
+    }
+}
+
+struct MovePerformer {
+    func move(_ board: GameBoard, _ direction: Direction? = nil) throws -> GameBoard {
+        do {
+            let newBoard = try board.movingSnake(direction ?? board.snake.direction)
+            return newBoard.foodEaten ? handleFoodCollision(collidingBoard: newBoard) : newBoard
+        } catch {
+            throw error
+        }
+    }
+    
+    private func handleFoodCollision(collidingBoard: GameBoard) -> GameBoard {
+        let newFoodLocation = collidingBoard.newFoodLocation
+        return GameBoard(snake: Snake(direction: collidingBoard.snake.direction, cells: collidingBoard.snake.cells, justEaten: true), foodLocation: newFoodLocation, canWrap: collidingBoard.canWrap)
     }
 }
 
