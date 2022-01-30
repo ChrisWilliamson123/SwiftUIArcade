@@ -30,11 +30,15 @@ struct GamePausedView: View {
     var body: some View {
         VStack(spacing: 16) {
             Text("PAUSED").font(.largeTitle).foregroundColor(.primary)
-            VStack {
+            VStack(alignment: .leading) {
                 ForEach(Array(settings.settingsList.enumerated()), id: \.element) { index, element in
-                    Text("\(index == selectedSettingIndex ? ">" : " ") \(element.name): \(element.status)")
+                    HStack() {
+                        Image(systemName: "arrowtriangle.right.fill").foregroundColor(index == selectedSettingIndex ? .primary : .clear)
+                        Text("\(element.name): \(element.status)").foregroundColor(index == selectedSettingIndex ? .primary : .gray)
+                    }
                 }
             }
+            .offset(x: -8, y: 0)
             Text("Press START to resume").foregroundColor(.action)
         }
         .padding()
