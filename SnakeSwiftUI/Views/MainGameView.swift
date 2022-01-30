@@ -16,7 +16,6 @@ struct MainGameView: View {
     @ObservedObject var scoreManager: ScoreManager
     
     var canMove: Bool { !gameOver }
-//    @StateObject var movementHandler: SnakeMovementHandler
 
     var body: some View {
         VStack(spacing: 32) {
