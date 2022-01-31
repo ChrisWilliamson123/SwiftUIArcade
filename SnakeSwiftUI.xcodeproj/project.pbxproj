@@ -160,10 +160,10 @@
 				83EE1AE627A1DA4500A1434A /* Extensions */,
 				833F37CF279DA88D0065B692 /* SnakeSwiftUIApp.swift */,
 				833F37D1279DA88D0065B692 /* ContentView.swift */,
+				835E06AF27A5DD6600521849 /* AudioPlayer.swift */,
 				83EE1AF327A1F17400A1434A /* Resources */,
 				833F37D5279DA88F0065B692 /* Preview Content */,
 				83EE042927A09FBA00532F6D /* Info.plist */,
-				835E06AF27A5DD6600521849 /* AudioPlayer.swift */,
 			);
 			path = SnakeSwiftUI;
 			sourceTree = "<group>";
