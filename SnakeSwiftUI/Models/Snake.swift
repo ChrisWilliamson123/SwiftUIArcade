@@ -18,9 +18,10 @@ struct Snake: Equatable {
     func movedInDirection(_ direction: Direction) throws -> Snake {
         let adjustment = direction.adjustment
         let newHead = Coordinate(cells.last!.x + adjustment.x, cells.last!.y + adjustment.y)
-        if cells.contains(newHead) { throw SnakeMovementError.collision }
+        let newCellsWithoutHead = cells.suffix(from: justEaten ? 0 : 1)
+        if newCellsWithoutHead.contains(newHead) { throw SnakeMovementError.collision }
         
-        return Snake(direction: direction, cells: cells.suffix(from: justEaten ? 0 : 1) + [newHead])
+        return Snake(direction: direction, cells: Array(newCellsWithoutHead + [newHead]))
     }
     
     func wrapped(gameSize: Int) -> Snake {
@@ -40,49 +41,5 @@ struct Snake: Equatable {
             return Coordinate(x, y)
         })
         return Snake(direction: self.direction, cells: wrappedCells)
-    }
-}
-
-enum Direction {
-    case up
-    case right
-    case left
-    case down
-    
-    var adjustment: (x: Int, y: Int) {
-        switch self {
-        case .up: return (0, -1)
-        case .right: return (1, 0)
-        case .left: return (-1, 0)
-        case .down: return (0, 1)
-        }
-    }
-    
-    var reverseDirection: Direction {
-        switch self {
-        case .up: return .down
-        case .right: return .left
-        case .left: return .right
-        case .down: return .up
-        }
-    }
-    
-    var snakeHeadRotation: CGFloat {
-        switch self {
-        case .up:    return 270
-        case .right: return 0
-        case .left:  return 180
-        case .down:  return 90
-        }
-    }
-}
-
-struct Coordinate: Hashable {
-    let x: Int
-    let y: Int
-    
-    init(_ x: Int, _ y: Int) {
-        self.x = x
-        self.y = y
     }
 }
